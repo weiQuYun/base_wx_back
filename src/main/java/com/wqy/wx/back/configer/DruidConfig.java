@@ -26,7 +26,7 @@ import java.sql.SQLException;
 @Slf4j
 @Configuration
 // 配置mybatis的接口类放的地方
-@MapperScan(basePackages = "com.owner.waterback.waterdao.mapper", sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = "com.wqy,wx.back.plus2.mapper", sqlSessionFactoryRef = "sqlSessionFactory")
 public class DruidConfig {
 
     @Value("${spring.datasource.url}")
@@ -133,9 +133,9 @@ public class DruidConfig {
     // @Qualifier表示查找Spring容器中名字为test1DataSource的对象
     public SqlSessionFactory sqlSessionFactory(@Qualifier("waterDataSource") DruidDataSource datasource) throws Exception {
         log.info("初始化SqlSessionFactory");
-        String mapperLocations = "com.owner.waterback.waterdao.mapeerxml.**.xml";
+        String mapperLocations = "com.wqy.wx.back.plus2.mapper.xml.**.xml";
         String configLocation = "classpath:mybatis-config.xml";
-        String typeAliasesPackage = "com.owner.waterback.waterdao.pojo.**";
+        String typeAliasesPackage = "com.wqy.wx.back.plus2.entity.**";
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         //数据源
         sqlSessionFactory.setDataSource(datasource);

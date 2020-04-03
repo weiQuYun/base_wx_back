@@ -9,10 +9,10 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @MapperScan("com.wqy.wx.back")
 @SpringBootApplication
 @ServletComponentScan("com.wqy.wx.back")
-public class BaseBootApplication {
+public class StartApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BaseBootApplication.class, args);
+        SpringApplication.run(StartApplication.class, args);
         System.out.println("==========启动成功 ！=======");
     }
 

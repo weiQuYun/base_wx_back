@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  **/
 @Slf4j
 @Component
-@RestControllerAdvice(basePackages = {"com.owner.waterback"})
+@RestControllerAdvice(basePackages = {"com.wqy.wx.nack"})
 public class GlobalExceptionHandler {
     @Autowired
     private ErrorBean errorBean;

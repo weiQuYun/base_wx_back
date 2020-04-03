@@ -4,6 +4,7 @@ package com.wqy.wx.back.common.util;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.configer.exception.BizException;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,7 +73,7 @@ public class ParamUtils {
         if (Constant.DATE.equals(type) && f.get(e) != null) {
             buffer.append("\n√ Date 添加—> 属性名:" + f.getName() + "\t 属性值:" + f.get(e));
             queryWrapper.eq(CamelAndUnderLineConverter.humpToLine2(f.getName()), Date.valueOf(f.get(e).toString()));
-        } else if (f.get(e) != null) {
+        } else if (f.get(e) != null&& StringUtils.isNotEmpty(String.valueOf(f.get(e)))) {
             buffer.append("\n√ " + type + " 添加—> 属性名:" + f.getName() + "\t 属性值:" + f.get(e));
             queryWrapper.eq(CamelAndUnderLineConverter.humpToLine2(f.getName()), f.get(e));
         }

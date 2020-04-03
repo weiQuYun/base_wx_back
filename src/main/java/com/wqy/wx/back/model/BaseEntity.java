@@ -1,16 +1,14 @@
 package com.wqy.wx.back.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.common.util.UuidUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -38,13 +36,13 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
      * 主键ID
      */
     @ApiModelProperty(value = "主键ID")
-    @TableId(value = "id")
-    private Long id;
+    @TableId(value = "id",type = IdType.INPUT)
+    private String id ;
     /**
      * 创建日期 - 现在时表示主动创建
      */
     @ApiModelProperty(value = "创建日期")
-    private Date createTime;
+    private Date createTime = new Date();
 
     @Override
     protected Serializable pkVal() {
@@ -59,7 +57,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     @Transactional
     @Override
     public boolean insert() {
-        this.id = UuidUtil.getUniqID(0L);
         SqlSession sqlSession = this.sqlSession();
         boolean var3;
         try {
@@ -69,7 +66,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
         }
         return var3;
     }
-
     /**
      * 重写添加或者修改方法
      *
@@ -78,7 +74,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     @Transactional
     @Override
     public boolean insertOrUpdate() {
-        this.id = UuidUtil.getUniqID(0L);
         if (!StringUtils.checkValNull(this.pkVal()) && !Objects.isNull(this.selectById(this.pkVal()))) {
             return this.updateById();
         } else {
