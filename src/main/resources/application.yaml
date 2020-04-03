@@ -1,0 +1,91 @@
+server:
+  port: 60010
+  sessionTimeout: 30
+  tomcat.uri-encoding: UTF-8
+  servlet:
+    session:
+      timeout: 3600s
+      cookie:
+        max-age: -1
+spring:
+  jackson:
+    time-zone: GMT+8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  mvc:
+    static-path-pattern: /**
+    dispatch-options-request: true
+  profiles:
+    include: dev
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: Ov4j7fKiCzY=
+    password: jHxmeDeUUkM=
+    url: jdbc:mysql://localhost:3306/water?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    initialSize: 1
+    minIdle: 40                      # 空闲时间，超过此空闲时间，数据库连接将被标记为不可用，然后被释放。设为0 表示无限制
+    maxActive: 200
+    removeAbandoned: true           #超过时间限制是否回收
+    removeAbandonedTimeout: 30       #超时时间；单位为秒。180秒=3分钟
+    logAbandoned: false               #是否关闭abanded连接时输出错误日志
+    maxWait: 60000                   #最大建立连接等待时间
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall
+    connectionProperties:
+
+
+
+logging:
+  level:
+    org.springframework.data.mongodb.core: DEBUG
+    com.owner.waterback.waterdao.mapper: DEBUG
+    com:
+      example:
+        mapper : debug
+swagger:
+  enable: true
+  basePackage: com.wqy.BaseBoot
+  groupName: api接口管理
+  version: @project.version@
+
+
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapping/*Mapper.xml
+  config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.owner.waterback.waterdao.entity.**
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    idType: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    fieldStrategy: 0
+    #驼峰下划线转换
+    dbColumnUnderline: true
+    #刷新mapper 调试神器
+    isRefresh: true
+    #数据库大写下划线转换
+    isCapitalMode: true
+    #逻辑删除配置
+    logicDeleteValue: 0
+    logicNotDeleteValue: 1
+    db-config:
+      db-type: mysql
+      column-underline: true
+      logic-delete-value: true
+      logic-not-delete-value: false
+
