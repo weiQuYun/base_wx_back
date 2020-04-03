@@ -33,17 +33,10 @@ public class CrossFilter implements Filter {
         System.out.println("請求路徑：" + path);
         HttpSession session = httpServletRequest.getSession();
         Req req = (Req) session.getAttribute(request.getRemoteAddr());
-        if (!path.contains("/logion") && null != req) {
-            //将header 中的数据封装成对象，并放入header中
-            BodyReaderHttpServletRequestWrapper requestWrapper = new BodyReaderHttpServletRequestWrapper(httpServletRequest);
-            //设置响应头
-            HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
-            chain.doFilter(requestWrapper, httpResponse);
-        } else {
-            //设置响应头
-            HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
-            chain.doFilter(request, httpResponse);
-        }
+        //设置响应头
+        HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
+        chain.doFilter(request, httpResponse);
+
     }
 
     private HttpServletResponse getHttpServletResponse(HttpServletResponse response) {

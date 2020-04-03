@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author licm
  * @since 2020-04-03
  */
-@Api(tags = {"评论投诉表i"})
+@Api(tags = {"评论投诉表接口管理"})
 @RestController
 @RequestMapping("/tComment")
 public class TCommentController {

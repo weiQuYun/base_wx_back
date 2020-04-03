@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author licm
  * @since 2020-04-03
  */
-@Api(tags = {"后台用户"})
+@Api(tags = {"后台用户接口管理"})
 @RestController
 @RequestMapping("/tUser")
 public class TUserController {

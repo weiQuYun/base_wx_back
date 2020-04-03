@@ -14,7 +14,7 @@ import ${superControllerClassPackage};
 * @author ${author}
 * @since ${date}
 */
-@Api(tags = {"$!{table.comment}"})
+@Api(tags = "$!{table.comment}接口管理")
 #if(${restControllerStyle})
 @RestController
 #else
