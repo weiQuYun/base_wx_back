@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.common.util.TokenUtil;
 import com.wqy.wx.back.common.util.UuidUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -105,7 +104,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
 
     @Override
     public boolean deleteById() {
-        if (Constant.ONE.equals(String.valueOf(TokenUtil.getUserId()))) {
             Assert.isFalse(StringUtils.checkValNull(this.pkVal()), "deleteById primaryKey is null.", new Object[0]);
             SqlSession sqlSession = this.sqlSession();
             boolean var3;
@@ -115,14 +113,10 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
                 this.closeSqlSession(sqlSession);
             }
             return var3;
-        } else {
-            return this.prohibitById();
-        }
     }
 
     @Override
     public boolean delete(Wrapper<T> queryWrapper) {
-        if (Constant.ONE.equals(String.valueOf(TokenUtil.getUserId()))) {
             Map<String, Object> map = new HashMap(1);
             map.put("ew", queryWrapper);
             SqlSession sqlSession = this.sqlSession();
@@ -133,9 +127,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
                 this.closeSqlSession(sqlSession);
             }
             return var4;
-        } else {
-            return this.prohibit(queryWrapper);
-        }
     }
 
     /**
@@ -164,7 +155,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
      * @return
      */
     public boolean prohibit(Wrapper<T> updateWrapper) {
-        ((UpdateWrapper<T>) updateWrapper).eq("del_status", Constant.ONE);
         Map<String, Object> map = new HashMap(2);
         map.put("et", this);
         map.put("ew", updateWrapper);
@@ -184,9 +174,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     public List<T> selectAll() {
         Map<String, Object> map = new HashMap(1);
         Wrapper<T> queryWrapper = new QueryWrapper<>();
-        if (!Constant.ONE.toString().equals(String.valueOf(TokenUtil.getUserId()))) {
-            ((QueryWrapper<T>) queryWrapper).eq("del_status", Constant.ZERO);
-        }
         map.put("ew", queryWrapper);
         SqlSession sqlSession = this.sqlSession();
         List var2;
@@ -202,9 +189,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     public T selectById() {
         Assert.isFalse(StringUtils.checkValNull(this.pkVal()), "selectById primaryKey is null.", new Object[0]);
         T t = this.selectById(this.pkVal());
-        if (Constant.ONE.equals(String.valueOf(TokenUtil.getUserId()))) {
-            return t;
-        }
         return t;
     }
 
@@ -212,9 +196,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     public List<T> selectList(Wrapper<T> queryWrapper) {
         Map<String, Object> map = new HashMap(1);
         QueryWrapper<T> tQueryWrapper = (QueryWrapper<T>) queryWrapper;
-        if (!Constant.ONE.toString().equals(String.valueOf(TokenUtil.getUserId()))) {
-            tQueryWrapper.eq("del_status", Constant.ZERO);
-        }
         map.put("ew", tQueryWrapper);
         SqlSession sqlSession = this.sqlSession();
         List var4;

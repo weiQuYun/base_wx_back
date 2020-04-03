@@ -27,7 +27,6 @@ public class GlobalInterceptor implements HandlerInterceptor {
 //            //我们将解析的用户结果先放入session中
 //            request.getSession().setAttribut("currentUser",user);
 //        }
-
         return true;
     }
 }

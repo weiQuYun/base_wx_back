@@ -31,8 +31,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
-//开启访问接口文档的权限
-@ConditionalOnExpression("${swagger.enable}")
 public class SwaggerConfig {
     @Value("${swagger.basePackage}")
     private String basePackage;

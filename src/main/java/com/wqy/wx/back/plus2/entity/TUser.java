@@ -43,7 +43,6 @@ public class TUser extends BaseEntity<TUser> implements Serializable {
      * 是否禁用此用户-101
      */
     @ApiModelProperty(value = "是否禁用此用户-101")
-    @TableField("is_active")
     @TableField(value = "is_active", fill = FieldFill.INSERT_UPDATE)
     private Boolean active;
     /**
