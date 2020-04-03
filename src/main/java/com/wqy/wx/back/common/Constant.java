@@ -18,7 +18,7 @@ public class Constant {
     /**
      * 请求前置
      */
-    public final static String MAPPING = "/api/water";
+    public final static String MAPPING = "/api/wqy";
     /**
      * decimal + integer (-MAX, MAX)
      */
