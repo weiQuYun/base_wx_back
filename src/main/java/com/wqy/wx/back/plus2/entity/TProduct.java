@@ -9,8 +9,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author licm
@@ -40,6 +42,7 @@ public class TProduct extends BaseEntity<TProduct> implements Serializable {
     @ApiModelProperty(value = "图片标题URL")
     @TableField(value = "pro_image", fill = FieldFill.INSERT_UPDATE)
     private String proImage;
+
     /**
      * 原价
      */
@@ -88,5 +91,8 @@ public class TProduct extends BaseEntity<TProduct> implements Serializable {
     @ApiModelProperty(value = "已售")
     @TableField(value = "pro_out", fill = FieldFill.INSERT_UPDATE)
     private Integer proOut;
+
+
+    private List<String> product_image;
 
 }

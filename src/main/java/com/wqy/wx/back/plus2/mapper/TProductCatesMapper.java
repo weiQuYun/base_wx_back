@@ -2,6 +2,7 @@ package com.wqy.wx.back.plus2.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wqy.wx.back.plus2.entity.TProductCates;
+import org.apache.ibatis.annotations.Delete;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.wqy.wx.back.plus2.entity.TProductCates;
  */
 public interface TProductCatesMapper extends BaseMapper<TProductCates> {
 
+    @Delete("delete from t_product_cates where product_id = #{id}")
+    void deleteProduct(String id);
 }

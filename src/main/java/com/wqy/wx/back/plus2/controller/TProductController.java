@@ -1,9 +1,14 @@
 package com.wqy.wx.back.plus2.controller;
 
 import com.wqy.wx.back.common.Constant;
+import com.wqy.wx.back.plus2.entity.TProduct;
+import com.wqy.wx.back.plus2.service.ITProductService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author licm
@@ -13,4 +18,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Constant.MAPPING + "/tProduct")
 public class TProductController {
+    @Autowired
+    private ITProductService itProductService;
+
+    @GetMapping("/list")
+    @ApiOperation("获取全部")
+    public void getProductAll() {
+        itProductService.searchAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("删除")
+    public void deleteProduct(@PathVariable String id) {
+        itProductService.deleteProduct(id);
+    }
+
+    @PostMapping("/put/add")
+    @ApiOperation("添加")
+    public void addProduct(@RequestParam TProduct tProduct) {
+        itProductService.insertProduct(tProduct);
+    }
+
+    @PutMapping("/put/update")
+    @ApiOperation("修改")
+    public void updateProduct(@RequestParam TProduct tProduct) {
+        itProductService.updateProduct(tProduct);
+    }
+
+    @GetMapping("/page/search/{page}/{size}")
+    @ApiOperation("分页查询")
+    public void seachProductPage(@PathVariable int page, @PathVariable int size) {
+        itProductService.searchAll(page, size);
+    }
+    @PutMapping("/batch/put/update")
+    @ApiOperation("批量修改")
+    public void updateProductBatch(@RequestParam List<TProduct> list){
+        itProductService.updateProduct(list);
+    }
+    @PostMapping("/batch/put/add")
+    @ApiOperation("批量添加")
+    public void addProductBatch(@RequestParam List<TProduct> list){
+        itProductService.insertProduct(list);
+    }
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("批量删除")
+    public void deleteProductBatch(@PathVariable List<String> id){
+        itProductService.deleteProduct(id);
+    }
 }
