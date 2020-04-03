@@ -1,5 +1,6 @@
 package com.wqy.wx.back.dto;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,4 +24,5 @@ public class LoginDto implements Serializable {
     private String userName;
     @ApiModelProperty("密码")
     private String password;
+
 }

@@ -21,10 +21,11 @@ spring:
   profiles:
     include: dev
   datasource:
+    name: wqyun
     type: com.alibaba.druid.pool.DruidDataSource
-    username: Ov4j7fKiCzY=
-    password: jHxmeDeUUkM=
-    url: jdbc:mysql://localhost:3306/water?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 1234
+    url: jdbc:mysql://192.168.101.106:3306/base_wx?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
     driverClassName: com.mysql.cj.jdbc.Driver
     initialSize: 1
     minIdle: 40                      # 空闲时间，超过此空闲时间，数据库连接将被标记为不可用，然后被释放。设为0 表示无限制
@@ -43,6 +44,19 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     filters: stat,wall
     connectionProperties:
+#    filters: stat
+#    maxActive: 20
+#    initialSize: 1
+#    maxWait: 60000
+#    minIdle: 1
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: select 'x'
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    maxOpenPreparedStatements: 20
 
 
 
@@ -55,7 +69,7 @@ logging:
         mapper : debug
 swagger:
   enable: true
-  basePackage: com.wqy.BaseBoot
+  basePackage: com.wqy.wx.back
   groupName: api接口管理
   version: @project.version@
 
@@ -63,9 +77,9 @@ swagger:
 
 #mybatis-plus
 mybatis-plus:
-  mapper-locations: classpath:/mapping/*Mapper.xml
+  mapper-locations: classpath:/com/wqy/wx/back/plus2/mapper/xml/*Mapper.xml
   config-location: classpath:mybatis-config.xml
-  type-aliases-package: com.owner.waterback.waterdao.entity.**
+  type-aliases-package: com.wqy.wx.back.plus2.entity.**
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false

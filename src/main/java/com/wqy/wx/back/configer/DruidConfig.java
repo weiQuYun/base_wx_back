@@ -99,8 +99,8 @@ public class DruidConfig {
     public DruidDataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(this.dbUrl);
-        datasource.setUsername(DESUtil.getDecryptString(username));
-        datasource.setPassword(DESUtil.getDecryptString(password));
+        datasource.setUsername(username);
+        datasource.setPassword(password);
         datasource.setDriverClassName(driverClassName);
         //configuration
         datasource.setInitialSize(initialSize);

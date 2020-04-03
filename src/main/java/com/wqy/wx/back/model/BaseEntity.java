@@ -45,27 +45,7 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
      * 创建日期 - 现在时表示主动创建
      */
     @ApiModelProperty(value = "创建日期")
-    private Date addTime;
-    /**
-     * 修改时间
-     */
-    @ApiModelProperty(value = "修改时间")
-    private Date updateTime;
-    /**
-     * 添加人
-     */
-    @ApiModelProperty(value = "添加人")
-    private Long addUserId;
-    /**
-     * 修改人
-     */
-    @ApiModelProperty(value = "修改人")
-    private Long updateUserId;
-    /**
-     * 删除状态
-     */
-    @ApiModelProperty(value = "删除状态")
-    private Integer delStatus;
+    private Date createTime;
 
     @Override
     protected Serializable pkVal() {
@@ -81,11 +61,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     @Override
     public boolean insert() {
         this.id = UuidUtil.getUniqID(0L);
-        this.addTime = new Date();
-        this.updateTime = this.addTime;
-        this.addUserId = TokenUtil.getUserId();
-        this.updateUserId = this.addUserId;
-        this.delStatus = Constant.ZERO;
         SqlSession sqlSession = this.sqlSession();
         boolean var3;
         try {
@@ -116,8 +91,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     @Override
     public boolean updateById() {
         Assert.isFalse(StringUtils.checkValNull(this.pkVal()), "修改时主键为空", new Object[0]);
-        this.updateUserId = TokenUtil.getUserId();
-        this.delStatus = Constant.ZERO;
         Map<String, Object> map = new HashMap(1);
         map.put("et", this);
         SqlSession sqlSession = this.sqlSession();
@@ -174,8 +147,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
         Assert.isFalse(null == this.id, "删除时主键为空", new Object[0]);
         SqlSession sqlSession = this.sqlSession();
         boolean var3;
-        this.delStatus = Constant.ONE;
-        this.updateUserId = TokenUtil.getUserId();
         Map<String, Object> map = new HashMap(1);
         map.put("et", this);
         try {
@@ -195,7 +166,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     public boolean prohibit(Wrapper<T> updateWrapper) {
         ((UpdateWrapper<T>) updateWrapper).eq("del_status", Constant.ONE);
         Map<String, Object> map = new HashMap(2);
-        this.updateUserId = TokenUtil.getUserId();
         map.put("et", this);
         map.put("ew", updateWrapper);
         SqlSession sqlSession = this.sqlSession();
@@ -234,8 +204,6 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
         T t = this.selectById(this.pkVal());
         if (Constant.ONE.equals(String.valueOf(TokenUtil.getUserId()))) {
             return t;
-        } else if (Constant.ONE.equals(((BaseEntity) t).getDelStatus())) {
-            return null;
         }
         return t;
     }

@@ -1,9 +1,12 @@
 package com.wqy.wx.back.configer;
 
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -23,8 +26,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Version V1.0
  * @Explain : swagger 配置
  **/
+
 @Configuration
 @EnableSwagger2
+@EnableKnife4j
+@Import(BeanValidatorPluginsConfiguration.class)
 //开启访问接口文档的权限
 @ConditionalOnExpression("${swagger.enable}")
 public class SwaggerConfig {

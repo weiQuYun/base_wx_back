@@ -19,8 +19,8 @@ import java.nio.file.Paths;
  * @Explain :
  **/
 public class GeneratorCode {
-    private static String packageName = "com.wqy.BaseBoot.plus2";
-    private static String outDir = "E:/myspace/WaterBack/src/main/java";
+    private static String packageName = "com.wqy.wx.back.plus2";
+    private static String outDir = "E:\\workspace\\base_wx_back\\src\\main\\java";
     private static String entity = "entity";
     private static String mapper = "mapper";
     private static String service = "service";
@@ -44,19 +44,20 @@ public class GeneratorCode {
         //user -> UserService, 设置成true: user -> IUserService
         boolean serviceNameStartWithI = true;
         generateByTables(serviceNameStartWithI, packageName,
-                "menu");
+                "t_user","t_role","t_product_image","t_product_contents","t_product_cates",
+                "t_product","t_order_info","t_order","t_menber","t_hotel","t_comment","t_cart");
     }
 
 
 
     private static void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/water?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC";
+        String dbUrl = "jdbc:mysql://192.168.101.106:3306/base_wx?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
                 .setUsername("root")
-                .setPassword("123")
+                .setPassword("1234")
                 .setDriverName("com.mysql.cj.jdbc.Driver");
         StrategyConfig strategyConfig = new StrategyConfig();
         strategyConfig
@@ -69,7 +70,7 @@ public class GeneratorCode {
                 // 自定义实体父类
 //                .setSuperEntityClass("com.wqy.BaseBoot.waterdao.BaseEntity")
                 // 自定义实体，公共字段
-                .setSuperEntityColumns( "id", "add_time","update_time", "add_user_id","update_user_id","del_status" )
+                .setSuperEntityColumns( "id", "create_time" )
 //                .setTableFillList(tableFillList)
                 .setEntityBooleanColumnRemoveIsPrefix(true);
         config.setActiveRecord(true)
