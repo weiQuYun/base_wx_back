@@ -27,35 +27,35 @@ public class TProductController {
         itProductService.searchAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("删除")
     public void deleteProduct(@PathVariable String id) {
         itProductService.deleteProduct(id);
     }
 
-    @PostMapping("/put/add")
+    @PostMapping("")
     @ApiOperation("添加")
     public void addProduct(@RequestParam TProduct tProduct) {
         itProductService.insertProduct(tProduct);
     }
 
-    @PutMapping("/put/update")
+    @PutMapping("")
     @ApiOperation("修改")
     public void updateProduct(@RequestParam TProduct tProduct) {
         itProductService.updateProduct(tProduct);
     }
 
-    @GetMapping("/page/search/{page}/{size}")
+    @GetMapping("/page/{page}/{size}")
     @ApiOperation("分页查询")
-    public void seachProductPage(@PathVariable int page, @PathVariable int size) {
+    public void searchProductPage(@PathVariable int page, @PathVariable int size) {
         itProductService.searchAll(page, size);
     }
-    @PutMapping("/batch/put/update")
+    @PutMapping("/batch")
     @ApiOperation("批量修改")
     public void updateProductBatch(@RequestParam List<TProduct> list){
         itProductService.updateProduct(list);
     }
-    @PostMapping("/batch/put/add")
+    @PostMapping("/batch")
     @ApiOperation("批量添加")
     public void addProductBatch(@RequestParam List<TProduct> list){
         itProductService.insertProduct(list);

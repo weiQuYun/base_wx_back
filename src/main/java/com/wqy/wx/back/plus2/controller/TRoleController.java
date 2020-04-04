@@ -1,9 +1,16 @@
 package com.wqy.wx.back.plus2.controller;
 
 import com.wqy.wx.back.common.Constant;
+import com.wqy.wx.back.plus2.entity.TProduct;
+import com.wqy.wx.back.plus2.entity.TRole;
+import com.wqy.wx.back.plus2.service.ITProductService;
+import com.wqy.wx.back.plus2.service.ITRoleService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author licm
@@ -13,4 +20,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Constant.MAPPING + "/tRole")
 public class TRoleController {
+    @Autowired
+    private ITRoleService itRoleService;
+
+    @GetMapping("/list")
+    @ApiOperation("获取全部")
+    public void getTRoleAll() {
+        itRoleService.searchAll();
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("删除")
+    public void deleteTRole(@PathVariable String id) {
+        itRoleService.deleteTRole(id);
+    }
+
+    @PostMapping("")
+    @ApiOperation("添加")
+    public void addTRole(@RequestParam TRole tRole) {
+        itRoleService.insertTRole(tRole);
+    }
+
+    @PutMapping("")
+    @ApiOperation("修改")
+    public void updateTRole(@RequestParam TRole tRole) {
+        itRoleService.updateTRole(tRole);
+    }
+
+    @GetMapping("/page/{page}/{size}")
+    @ApiOperation("分页查询")
+    public void searchTRolePage(@PathVariable int page, @PathVariable int size) {
+        itRoleService.searchAll(page, size);
+    }
+    @PutMapping("/batch")
+    @ApiOperation("批量修改")
+    public void updateTRoleBatch(@RequestParam List<TRole> list){
+        itRoleService.updateTRole(list);
+    }
+    @PostMapping("/batch")
+    @ApiOperation("批量添加")
+    public void addTRoleBatch(@RequestParam List<TRole> list){
+        itRoleService.insertTRole(list);
+    }
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation("批量删除")
+    public void deleteTRoleBatch(@PathVariable List<String> id){
+        itRoleService.deleteTRole(id);
+    }
 }

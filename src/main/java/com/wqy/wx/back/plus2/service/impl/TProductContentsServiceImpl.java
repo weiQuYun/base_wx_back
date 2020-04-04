@@ -6,6 +6,8 @@ import com.wqy.wx.back.plus2.mapper.TProductContentsMapper;
 import com.wqy.wx.back.plus2.service.ITProductContentsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 商品详情介绍表 服务实现类
@@ -17,4 +19,43 @@ import org.springframework.stereotype.Service;
 @Service
 public class TProductContentsServiceImpl extends ServiceImpl<TProductContentsMapper, TProductContents> implements ITProductContentsService {
 
+    @Override
+    public void searchAll() {
+
+    }
+
+    @Override
+    public void deleteProductContents(String id) {
+
+    }
+
+    @Override
+    public void insertProductContents(TProductContents tProductContents) {
+
+    }
+
+    @Override
+    public void updateProductContents(TProductContents tProductContents) {
+
+    }
+
+    @Override
+    public void searchAll(int page, int size) {
+
+    }
+
+    @Override
+    public void updateProductContents(List<TProductContents> list) {
+
+    }
+
+    @Override
+    public void insertProductContents(List<TProductContents> list) {
+
+    }
+
+    @Override
+    public void deleteProductContents(List<String> id) {
+
+    }
 }
