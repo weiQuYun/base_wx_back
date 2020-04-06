@@ -1,11 +1,8 @@
 package com.wqy.wx.back.configer;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.wqy.wx.back.common.util.UuidUtil;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  * 成都微趣云网络科技有限公司

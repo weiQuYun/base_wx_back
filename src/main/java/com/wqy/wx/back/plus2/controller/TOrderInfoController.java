@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "成功订单页面接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tOrderInfo")
+@RequestMapping(Constant.MAPPING + "/orderInfo")
 public class TOrderInfoController {
     @Autowired
     private ITOrderInfoService itOrderInfoService;

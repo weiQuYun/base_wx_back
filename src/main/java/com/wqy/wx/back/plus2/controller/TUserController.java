@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Api(tags = "后台用户接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tUser")
+@RequestMapping(Constant.MAPPING + "/user")
 public class TUserController {
     @Autowired
     private ITUserService itUserService;

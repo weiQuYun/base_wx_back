@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "订单页面接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tOrder")
+@RequestMapping(Constant.MAPPING + "/order")
 public class TOrderController {
     @Autowired
     private ITOrderService itOrderService;

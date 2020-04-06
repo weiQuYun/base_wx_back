@@ -44,7 +44,7 @@ public class GetHeaderHandlerMethodArgReslover implements HandlerMethodArgumentR
 //        req.setUserType(request.getHeader("userType"));
         req.setUserName(request.getHeader("userName"));
         req.setUserId(request.getHeader("userId"));
-        req.setShopId(request.getHeader("shopId"));
+//        req.setShopId(request.getHeader("shopId"));
 //        return StringUtil.stringToObject2(request.getHeader("req"),Req.class);
         return req;
     }

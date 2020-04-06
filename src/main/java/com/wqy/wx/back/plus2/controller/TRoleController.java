@@ -1,9 +1,7 @@
 package com.wqy.wx.back.plus2.controller;
 
 import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.entity.TRole;
-import com.wqy.wx.back.plus2.service.ITProductService;
 import com.wqy.wx.back.plus2.service.ITRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +16,7 @@ import java.util.List;
  */
 @Api(tags = "角色权限接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tRole")
+@RequestMapping(Constant.MAPPING + "role")
 public class TRoleController {
     @Autowired
     private ITRoleService itRoleService;

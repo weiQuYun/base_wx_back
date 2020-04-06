@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "评论投诉表i接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tComment")
+@RequestMapping(Constant.MAPPING + "/comment")
 public class TCommentController {
     @Autowired
     private ITCommentService itCommentService;

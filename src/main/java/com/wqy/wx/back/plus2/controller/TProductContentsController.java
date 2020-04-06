@@ -1,10 +1,8 @@
 package com.wqy.wx.back.plus2.controller;
 
 import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.entity.TProductContents;
 import com.wqy.wx.back.plus2.service.ITProductContentsService;
-import com.wqy.wx.back.plus2.service.ITProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import java.util.List;
  */
 @Api(tags = "商品详情介绍表接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tProductContents")
+@RequestMapping(Constant.MAPPING + "/productContents")
 public class TProductContentsController {
     @Autowired
     private ITProductContentsService itProductContentsService;

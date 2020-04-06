@@ -2,10 +2,8 @@ package com.wqy.wx.back.plus2.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.entity.TProductCates;
 import com.wqy.wx.back.plus2.service.ITProductCatesService;
-import com.wqy.wx.back.plus2.service.ITProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,7 @@ import java.util.List;
  */
 @Api(tags = "商品分类表接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tProductCates")
+@RequestMapping(Constant.MAPPING + "/productCates")
 public class TProductCatesController {
     @Autowired
     private ITProductCatesService itProductCatesService;

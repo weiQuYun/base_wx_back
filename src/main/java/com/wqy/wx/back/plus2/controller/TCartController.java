@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "购物车接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tCart")
+@RequestMapping(Constant.MAPPING + "/cart")
 public class TCartController {
 
     @Autowired

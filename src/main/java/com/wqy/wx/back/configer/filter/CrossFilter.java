@@ -1,15 +1,22 @@
 package com.wqy.wx.back.configer.filter;
 
+import com.wqy.wx.back.common.Constant;
+import com.wqy.wx.back.configer.Req;
+import com.wqy.wx.back.configer.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
-//@Configuration
-//@WebFilter(urlPatterns = "/*")
+@Configuration
+@WebFilter(urlPatterns = {"/api/*"},filterName = "securityRequestFilter")
 public class CrossFilter implements Filter {
 
     @Override
@@ -29,7 +36,24 @@ public class CrossFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String path = httpServletRequest.getServletPath();
         System.out.println("請求路徑：" + path);
-//        //设置响应头
+        String token = httpServletRequest.getHeader("token");
+        String userId = httpServletRequest.getHeader("userId");
+        HttpSession session = httpServletRequest.getSession();
+        if(path.contains(Constant.MAPPING)) {
+            if(StringUtils.isNotEmpty(token) && StringUtils.isNotEmpty(userId)){
+                Req vxLoginDto1 = (Req)session.getAttribute(userId);
+                if(vxLoginDto1!=null){
+                    if(!vxLoginDto1.getIp().equals((request.getRemoteAddr()))){
+                        throw new BizException("单点登陆，此用户已在其他设备上登陆使用");
+                    }
+                }else{
+                    throw new BizException("错误认证，请先登陆!");
+                }
+            }else{
+                throw new BizException("请先登陆!");
+            }
+        }
+//      设置响应头
         HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
         chain.doFilter(request, httpResponse);
 

@@ -1,10 +1,8 @@
 package com.wqy.wx.back.plus2.controller;
 
 import com.wqy.wx.back.common.Constant;
-import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.entity.TProductImage;
 import com.wqy.wx.back.plus2.service.ITProductImageService;
-import com.wqy.wx.back.plus2.service.ITProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import java.util.List;
  */
 @Api(tags = "商品图片more接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tProductImage")
+@RequestMapping(Constant.MAPPING + "/productImage")
 public class TProductImageController {
     @Autowired
     private ITProductImageService itProductImageService;

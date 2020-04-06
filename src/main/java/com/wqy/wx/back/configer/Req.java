@@ -21,12 +21,14 @@ import java.io.Serializable;
 public class Req implements Serializable {
     @ApiModelProperty(value = "请求令牌", hidden = false)
     private String token;
+    @ApiModelProperty(value = "请求ip", hidden = false)
+    private String ip;
     @ApiModelProperty(value = "请求用户id", hidden = false)
     private String userId;
     @ApiModelProperty(value = "请求用户名称", hidden = false)
     private String userName;
-    //    @ApiModelProperty(value = "请求用户类型",hidden = false)
-//    private String userType;
-    @ApiModelProperty(value = "请求用户归属店铺", hidden = false)
-    private String shopId;
+    @ApiModelProperty(value = "请求用户类型",hidden = false)
+    private String userType;
+//    @ApiModelProperty(value = "请求用户归属店铺", hidden = false)
+//    private String shopId;
 }

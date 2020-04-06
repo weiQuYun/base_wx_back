@@ -2,8 +2,10 @@ package com.wqy.wx.back.common.util;
 
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.configer.exception.BizException;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,5 +74,9 @@ public class CheckUtils {
             throw new BizException("505", "主键异常");
         }
     }
-
+    public static void isListBlank(Collection collection ,String msg) {
+        if(CollectionUtils.isEmpty(collection)){
+            throw new BizException(msg+"数据不能为空");
+        }
+    }
 }

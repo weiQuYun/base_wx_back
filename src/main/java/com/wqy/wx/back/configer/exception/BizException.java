@@ -51,5 +51,4 @@ public class BizException extends RuntimeException implements Serializable {
         super(errorBean.getFront(errorCode, errorMsg));
         log.error(errorBean.getBack(errorCode, errorMsg));
     }
-
 }

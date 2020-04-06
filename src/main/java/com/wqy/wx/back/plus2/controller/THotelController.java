@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Api(tags = "店铺表接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tHotel")
+@RequestMapping(Constant.MAPPING + "/hotel")
 public class THotelController {
     @Autowired
     private ITHotelService itHotelService;

@@ -4,7 +4,6 @@ package com.wqy.wx.back.common.util;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.configer.exception.BizException;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,14 +47,14 @@ public class ParamUtils {
             for (Field f : fields) {
                 f.setAccessible(true);
                 String type = f.getGenericType().toString();
-                buffer.append("★属性名:" + f.getName() + "\t 属性值:" + f.get(e) + "\t 类型:" + type);
+                buffer.append("\n★属性名:" + f.getName() + "\t 属性值:" + f.get(e) + "\t 类型:" + type);
                 switchColumn(e, queryWrapper, f, type, buffer);
             }
             log.info(buffer.toString());
             log.info("--------------------------------------------------------------------------------");
             return queryWrapper;
         } catch (Exception e1) {
-            throw new BizException("A047", e1.toString());
+            throw new BizException("自动拼接参数失败");
         }
     }
 
@@ -73,7 +72,7 @@ public class ParamUtils {
         if (Constant.DATE.equals(type) && f.get(e) != null) {
             buffer.append("\n√ Date 添加—> 属性名:" + f.getName() + "\t 属性值:" + f.get(e));
             queryWrapper.eq(CamelAndUnderLineConverter.humpToLine2(f.getName()), Date.valueOf(f.get(e).toString()));
-        } else if (f.get(e) != null&& StringUtils.isNotEmpty(String.valueOf(f.get(e)))) {
+        }else if (f.get(e) != null&& !"null".equals(f.get(e).toString())) {
             buffer.append("\n√ " + type + " 添加—> 属性名:" + f.getName() + "\t 属性值:" + f.get(e));
             queryWrapper.eq(CamelAndUnderLineConverter.humpToLine2(f.getName()), f.get(e));
         }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Api(tags = "商品表接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "/tProduct")
+@RequestMapping(Constant.MAPPING + "/product")
 public class TProductController {
     @Autowired
     private ITProductService itProductService;

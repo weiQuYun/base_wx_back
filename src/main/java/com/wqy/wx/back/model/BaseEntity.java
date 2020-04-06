@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.wqy.wx.back.common.util.UUIDUtils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
      */
     @ApiModelProperty(value = "主键ID")
     @TableId(value = "id",type = IdType.INPUT)
-    private String id ;
+    private String id  = UUIDUtils.getCharAndNumr();
     /**
      * 创建日期 - 现在时表示主动创建
      */
