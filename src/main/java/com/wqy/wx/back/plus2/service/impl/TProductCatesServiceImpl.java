@@ -13,6 +13,7 @@ import com.wqy.wx.back.plus2.service.ITProductCatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean deleteProductCates(String id) {
         if (id.isEmpty()){
         tProductCatesMapper.deleteById(id);
@@ -64,6 +66,7 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean insertProductCates(TProductCates tProductCates) {
         tProductCates.setId(UUIDUtils.getCharAndNumr());//此处生成UUID 用于productCates ID  productID他处生成
         tProductCatesMapper.insert(tProductCates);
@@ -71,6 +74,7 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean updateProductCates(TProductCates tProductCates) {
         tProductCatesMapper.updateById(tProductCates);
         return true;

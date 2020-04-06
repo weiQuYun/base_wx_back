@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * 删除商品
      **/
     @Override
-    @ApiOperation("删除商品")
+    @Transactional
     public void deleteProduct(String id) {
         List list = new ArrayList();
         list.add(id);
@@ -67,6 +68,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * 批量删除
      **/
     @Override
+    @Transactional
     public void deleteProduct(List<String> list) {
         deleteProduct_(list);
     }
@@ -75,6 +77,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * 添加
      **/
     @Override
+    @Transactional
     public void insertProduct(TProduct tProduct) {
         List list = new ArrayList();
         list.add(tProduct);
@@ -111,6 +114,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * 分页查询
      * **/
     @Override
+
     public Page<TProduct> searchAll(int page, int size) {
         return tProductMapper.selectPage(new Page<>(page, size), null);
     }

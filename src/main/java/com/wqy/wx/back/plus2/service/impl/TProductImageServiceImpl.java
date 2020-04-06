@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean deleteProductImage(String id) {
         //此处拿到的是实际ID
         tProductImageMapper.deleteById(id);
@@ -41,12 +43,14 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean insertProductImage(TProductImage tProductImage) {
        tProductImageMapper.insert(tProductImage);//图片应带有ID 故不在生成
         return true;
     }
 
     @Override
+    @Transactional
     public Boolean updateProductImage(TProductImage tProductImage) {
         tProductImageMapper.deleteById(tProductImage.getId());
         tProductImageMapper.insert(tProductImage);
@@ -59,6 +63,7 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean updateProductImage(List<TProductImage> list) {
         if (list.size()>0){
         for (TProductImage tProductImage : list) {
@@ -69,6 +74,7 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean insertProductImage(List<TProductImage> list) {
         if(list.size()>0){
             for (TProductImage tProductImage : list) {
@@ -79,6 +85,7 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
+    @Transactional
     public Boolean deleteProductImage(List<String> id) {
         if(id.size()>0){
             for (String pId : id) {

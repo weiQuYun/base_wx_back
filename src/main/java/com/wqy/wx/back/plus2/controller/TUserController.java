@@ -58,19 +58,19 @@ public class TUserController {
         return itUserService.searchAll(page, size);
     }
     //以下不存在
-    @PutMapping("/batch")
-    @ApiOperation("批量修改")
-    public Boolean updateTUserBatch(@RequestBody List<TUser> list){
-        return itUserService.updateTUser(list);
-    }
-    @PostMapping("/batch")
-    @ApiOperation("批量添加")
-    public Boolean addTUserBatch(@RequestBody List<TUser> list){
-        return itUserService.insertTUser(list);
-    }
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation("批量删除")
-    public Boolean deleteTUserBatch(@PathVariable List<String> id){
-        return itUserService.deleteTUser(id);
-    }
+//    @PutMapping("/batch")
+//    @ApiOperation("批量修改")
+//    public Boolean updateTUserBatch(@RequestBody List<TUser> list){
+//        return itUserService.updateTUser(list);
+//    }
+//    @PostMapping("/batch")
+//    @ApiOperation("批量添加")
+//    public Boolean addTUserBatch(@RequestBody List<TUser> list){
+//        return itUserService.insertTUser(list);
+//    }
+//    @DeleteMapping("/delete/{id}")
+//    @ApiOperation("批量删除")
+//    public Boolean deleteTUserBatch(@PathVariable List<String> id){
+//        return itUserService.deleteTUser(id);
+//    }
 }

@@ -10,6 +10,7 @@ import com.wqy.wx.back.plus2.service.ITUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
+    @Transactional
     public Boolean deleteTUser(String id) {
         if (id.isEmpty()) {
             return false;
@@ -43,6 +45,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
+    @Transactional
     public Boolean insertTUser(TUser tUser) {
         if (tUserMapper.selectByUserName(tUser.getUserName()).size() < 1) {
             tUser.setId(UUIDUtils.getCharAndNumr());//此处添加UUID
@@ -52,6 +55,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
+    @Transactional
     public Boolean updateTUser(TUser tUser) {
         tUserMapper.updateById(tUser);
         return true;
@@ -69,16 +73,19 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     }
 
     @Override
+    @Transactional
     public Boolean insertTUser(List<TUser> list) {
         return true;
     }
 
     @Override
+    @Transactional
     public Boolean updateTUser(List<TUser> list) {
         return true;
     }
 
     @Override
+    @Transactional
     public Boolean deleteTUser(List<String> id) {
         return true;
     }

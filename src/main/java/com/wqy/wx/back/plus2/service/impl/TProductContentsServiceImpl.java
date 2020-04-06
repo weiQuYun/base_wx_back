@@ -7,6 +7,7 @@ import com.wqy.wx.back.plus2.service.ITProductContentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,12 +31,14 @@ public class TProductContentsServiceImpl extends ServiceImpl<TProductContentsMap
     }
 
     @Override
+    @Transactional
     public Boolean deleteProductContents(String id) {
         tProductContentsMapper.deleteById(id);
         return true;
     }
 
     @Override
+    @Transactional
     public Boolean insertProductContents(TProductContents tProductContents) {
         //删除原来的描述
         deleteProductContents(tProductContents.getId());//此处不在生成UUID 传递过来的值中已经有了用原来的
@@ -44,6 +47,7 @@ public class TProductContentsServiceImpl extends ServiceImpl<TProductContentsMap
     }
 
     @Override
+    @Transactional
     public Boolean updateProductContents(TProductContents tProductContents) {
         //删除原来的描述
         deleteProductContents(tProductContents.getId());

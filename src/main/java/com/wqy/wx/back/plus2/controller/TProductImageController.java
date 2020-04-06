@@ -47,11 +47,11 @@ public class TProductImageController {
     }
 
     //此方法不存在
-    @GetMapping("/page/{page}/{size}")
-    @ApiOperation("分页查询")
-    public void searchProductImagePage(@PathVariable int page, @PathVariable int size) {
-        itProductImageService.searchAll(page, size);
-    }
+//    @GetMapping("/page/{page}/{size}")
+//    @ApiOperation("分页查询")
+//    public void searchProductImagePage(@PathVariable int page, @PathVariable int size) {
+//        itProductImageService.searchAll(page, size);
+//    }
 
     @PutMapping("/batch")
     @ApiOperation("批量修改")
