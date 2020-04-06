@@ -41,7 +41,7 @@ public abstract class BaseEntity<T extends Model<?>> extends Model<T> implements
     /**
      * 创建日期 - 现在时表示主动创建
      */
-    @ApiModelProperty(value = "创建日期")
+    @ApiModelProperty(value = "创建日期",example = "1900/01/01 00:00:00")
     private Date createTime = new Date();
 
     @Override

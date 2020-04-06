@@ -1,12 +1,10 @@
 package com.wqy.wx.back.configer.filter;
 
-import com.wqy.wx.back.configer.Req;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
@@ -31,9 +29,7 @@ public class CrossFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String path = httpServletRequest.getServletPath();
         System.out.println("請求路徑：" + path);
-        HttpSession session = httpServletRequest.getSession();
-        Req req = (Req) session.getAttribute(request.getRemoteAddr());
-        //设置响应头
+//        //设置响应头
         HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
         chain.doFilter(request, httpResponse);
 

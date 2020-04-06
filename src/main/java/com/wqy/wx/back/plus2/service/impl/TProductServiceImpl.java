@@ -1,6 +1,5 @@
 package com.wqy.wx.back.plus2.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.common.util.dozer.IGenerator;
@@ -10,12 +9,11 @@ import com.wqy.wx.back.plus2.mapper.*;
 import com.wqy.wx.back.plus2.service.ITProductService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -25,6 +23,7 @@ import java.util.Map;
  * @author licm
  * @since 2020-04-03
  */
+@Primary
 @Service
 public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> implements ITProductService {
     @Autowired

@@ -1,5 +1,9 @@
 package com.wqy.wx.back.common;
 
+import com.wqy.wx.back.common.util.DateUtil;
+
+import java.util.Date;
+
 /**
  * 成都微趣云网络科技有限公司
  *
@@ -74,4 +78,6 @@ public class Constant {
     public static final String LONG1 = "class java.lang.Long";
     public static final String LONG2 = "long";
     public static final String FLOAT = "float";
+
+    public static final String defaultDate = DateUtil.dateToString(new Date());
 }

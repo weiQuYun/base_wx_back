@@ -44,7 +44,7 @@ public class TMenber extends BaseEntity<TMenber> implements Serializable {
      */
     @ApiModelProperty(value = "角色id")
     @TableField(value = "auth_id", fill = FieldFill.INSERT_UPDATE)
-    private Boolean authId;
+    private Integer authId;
     /**
      * 地址
      */

@@ -32,12 +32,12 @@ public class TProductCates extends BaseEntity<TProductCates> implements Serializ
      */
     @ApiModelProperty(value = "分类状态")
     @TableField(value = "status", fill = FieldFill.INSERT_UPDATE)
-    private Boolean status;
+    private Integer status;
     /**
      * 分类组
      */
     @ApiModelProperty(value = "分类组")
     @TableField(value = "class_id", fill = FieldFill.INSERT_UPDATE)
-    private Boolean classId;
+    private Integer classId;
 
 }

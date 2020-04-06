@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TProductImage;
 import com.wqy.wx.back.plus2.mapper.TProductImageMapper;
 import com.wqy.wx.back.plus2.service.ITProductImageService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author licm
  * @since 2020-04-03
  */
+@Primary
 @Service
 public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, TProductImage> implements ITProductImageService {
 

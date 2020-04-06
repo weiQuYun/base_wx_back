@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TProductContents;
 import com.wqy.wx.back.plus2.mapper.TProductContentsMapper;
 import com.wqy.wx.back.plus2.service.ITProductContentsService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author licm
  * @since 2020-04-03
  */
+@Primary
 @Service
 public class TProductContentsServiceImpl extends ServiceImpl<TProductContentsMapper, TProductContents> implements ITProductContentsService {
 

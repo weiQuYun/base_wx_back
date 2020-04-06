@@ -2,6 +2,7 @@ package com.wqy.wx.back.common.util.dozer;
 
 
 import com.wqy.wx.back.common.util.CheckUtils;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
@@ -20,6 +21,7 @@ import java.util.Set;
  * @Version V1.0
  * @Explain :
  **/
+@Primary
 @Component
 public class BeanCopierGeneratorImpl implements IGenerator {
 
