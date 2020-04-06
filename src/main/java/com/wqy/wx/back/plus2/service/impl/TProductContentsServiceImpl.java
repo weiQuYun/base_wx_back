@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TProductContents;
 import com.wqy.wx.back.plus2.mapper.TProductContentsMapper;
 import com.wqy.wx.back.plus2.service.ITProductContentsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -21,24 +22,33 @@ import java.util.List;
 @Service
 public class TProductContentsServiceImpl extends ServiceImpl<TProductContentsMapper, TProductContents> implements ITProductContentsService {
 
+    @Autowired
+    private TProductContentsMapper tProductContentsMapper;
     @Override
-    public void searchAll() {
-
+    public TProductContents searchAll(String id) {
+        return tProductContentsMapper.selectById(id);
     }
 
     @Override
-    public void deleteProductContents(String id) {
-
+    public Boolean deleteProductContents(String id) {
+        tProductContentsMapper.deleteById(id);
+        return true;
     }
 
     @Override
-    public void insertProductContents(TProductContents tProductContents) {
-
+    public Boolean insertProductContents(TProductContents tProductContents) {
+        //删除原来的描述
+        deleteProductContents(tProductContents.getId());//此处不在生成UUID 传递过来的值中已经有了用原来的
+        tProductContentsMapper.insert(tProductContents);
+        return true;
     }
 
     @Override
-    public void updateProductContents(TProductContents tProductContents) {
-
+    public Boolean updateProductContents(TProductContents tProductContents) {
+        //删除原来的描述
+        deleteProductContents(tProductContents.getId());
+        tProductContentsMapper.update(tProductContents,null);
+        return true;
     }
 
     @Override

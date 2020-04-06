@@ -1,5 +1,6 @@
 package com.wqy.wx.back.plus2.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wqy.wx.back.plus2.entity.TUser;
 
@@ -15,19 +16,19 @@ import java.util.List;
  */
 public interface ITUserService extends IService<TUser> {
 
-    List<TUser> searchAll();
+    List<TUser> searchAll(TUser tUser);
 
-    void deleteTUser(String id);
+    Boolean deleteTUser(String id);
 
-    void insertTUser(TUser tUser);
+    Boolean insertTUser(TUser tUser);
 
-    void updateTUser(TUser tUser);
+    Boolean updateTUser(TUser tUser);
 
-    List<TUser> searchAll(int page,int size);
+    Page<TUser> searchAll(int page, int size);
 
-    void insertTUser(List<TUser> list);
+    Boolean insertTUser(List<TUser> list);
 
-    void updateTUser(List<TUser> list);
+    Boolean updateTUser(List<TUser> list);
 
-    void deleteTUser(List<String> id);
+    Boolean deleteTUser(List<String> id);
 }

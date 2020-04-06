@@ -16,13 +16,13 @@ import java.util.List;
 public interface ITProductContentsService extends IService<TProductContents> {
 
 
-    void searchAll();
+    TProductContents searchAll(String id);
 
-    void deleteProductContents(String id);
+    Boolean deleteProductContents(String id);
 
-    void insertProductContents(TProductContents tProductContents);
+    Boolean insertProductContents(TProductContents tProductContents);
 
-    void updateProductContents(TProductContents tProductContents);
+    Boolean updateProductContents(TProductContents tProductContents);
 
     void searchAll(int page, int size);
 

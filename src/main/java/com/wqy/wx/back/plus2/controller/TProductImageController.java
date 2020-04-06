@@ -23,10 +23,10 @@ public class TProductImageController {
     @Autowired
     private ITProductImageService itProductImageService;
 
-    @GetMapping("/list")
+    @GetMapping("/list/{id}")
     @ApiOperation("获取全部")
-    public void getProductImageAll() {
-        itProductImageService.searchAll();
+    public void getProductImageAll(@PathVariable String id) {
+        itProductImageService.searchAll(id);
     }
 
     @DeleteMapping("/{id}")
@@ -47,6 +47,7 @@ public class TProductImageController {
         itProductImageService.updateProductImage(tProductImage);
     }
 
+    //此方法不存在
     @GetMapping("/page/{page}/{size}")
     @ApiOperation("分页查询")
     public void searchProductImagePage(@PathVariable int page, @PathVariable int size) {

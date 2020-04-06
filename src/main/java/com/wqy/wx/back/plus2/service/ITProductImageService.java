@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ITProductImageService extends IService<TProductImage> {
 
-    List<TProductImage> searchAll();
+    List<TProductImage> searchAll(String id);
 
     void deleteProductImage(String id);
 
@@ -25,9 +25,9 @@ public interface ITProductImageService extends IService<TProductImage> {
 
     void searchAll(int page, int size);
 
-    void updateProductImage(List<TProductImage> list);
+    Boolean updateProductImage(List<TProductImage> list);
 
-    void insertProductImage(List<TProductImage> list);
+    Boolean insertProductImage(List<TProductImage> list);
 
-    void deleteProductImage(List<String> id);
+    Boolean deleteProductImage(List<String> id);
 }

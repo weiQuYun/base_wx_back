@@ -23,30 +23,31 @@ public class TProductContentsController {
     @Autowired
     private ITProductContentsService itProductContentsService;
 
-    @GetMapping("/list")
+    @GetMapping("/list/{id}")
     @ApiOperation("获取全部")
-    public void getProductContentsAll() {
-        itProductContentsService.searchAll();
+    public TProductContents getProductContentsAll(@PathVariable String id) {
+        return itProductContentsService.searchAll(id);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
-    public void deleteProductContents(@PathVariable String id) {
-        itProductContentsService.deleteProductContents(id);
+    public Boolean deleteProductContents(@PathVariable String id) {
+        return itProductContentsService.deleteProductContents(id);
     }
 
     @PostMapping("")
     @ApiOperation("添加")
-    public void addProductContents(@RequestParam TProductContents tProductContents) {
-        itProductContentsService.insertProductContents(tProductContents);
+    public Boolean addProductContents(@RequestParam TProductContents tProductContents) {
+        return itProductContentsService.insertProductContents(tProductContents);
     }
 
     @PutMapping("")
     @ApiOperation("修改")
-    public void updateProductContents(@RequestParam TProductContents tProductContents) {
-        itProductContentsService.updateProductContents(tProductContents);
+    public Boolean updateProductContents(@RequestParam TProductContents tProductContents) {
+        return itProductContentsService.updateProductContents(tProductContents);
     }
 
+    //以下不存在
     @GetMapping("/page/{page}/{size}")
     @ApiOperation("分页查询")
     public void seachProductContentsPage(@PathVariable int page, @PathVariable int size) {

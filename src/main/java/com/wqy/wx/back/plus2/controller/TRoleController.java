@@ -25,8 +25,8 @@ public class TRoleController {
 
     @GetMapping("/list")
     @ApiOperation("获取全部")
-    public void getTRoleAll() {
-        itRoleService.searchAll();
+    public List<TRole> getTRoleAll() {
+        return itRoleService.searchAll();
     }
 
     @DeleteMapping("/{id}")

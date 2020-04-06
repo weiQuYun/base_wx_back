@@ -1,9 +1,12 @@
 package com.wqy.wx.back.plus2.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.common.util.dozer.IGenerator;
 import com.wqy.wx.back.plus2.entity.TProduct;
+import com.wqy.wx.back.plus2.entity.TProductCates;
 import com.wqy.wx.back.plus2.entity.TProductImage;
 import com.wqy.wx.back.plus2.mapper.*;
 import com.wqy.wx.back.plus2.service.ITProductService;
@@ -45,7 +48,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * 查询所有
      * **/
     @Override
-    public List<TProduct> searchAll() {
+    public List<TProduct> searchAll(TProduct tProduct) {
         return tProductMapper.selectList(null);
     }
 
@@ -139,12 +142,11 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
         if (list.size() == 0) return true;
         for (int i = 0; i < list.size(); i++) {
             //添加店铺商品
+            list.get(i).setId(UUIDUtils.getCharAndNumr());//此处生成UUID
             tProductMapper.insert(list.get(i));
             if (list.get(i).getProduct_image().size()>0){
-                for (String s : list.get(i).getProduct_image()) {
-                    TProductImage tProductImage = new TProductImage();
-                    tProductImage.setProductId(list.get(i).getId().toString());
-                    tProductImage.setProductImage(s);
+                //添加图片
+                for (TProductImage tProductImage : list.get(i).getProduct_image()) {
                     tProductImageMapper.insert(tProductImage);
                 }
             }

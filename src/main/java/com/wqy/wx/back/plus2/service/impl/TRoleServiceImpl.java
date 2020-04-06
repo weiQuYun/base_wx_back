@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TRole;
 import com.wqy.wx.back.plus2.mapper.TRoleMapper;
 import com.wqy.wx.back.plus2.service.ITRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,11 @@ import java.util.List;
 @Service
 public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements ITRoleService {
 
-
+    @Autowired
+    private TRoleMapper tRoleMapper;
     @Override
     public List<TRole> searchAll() {
-        return null;
+        return tRoleMapper.selectList(null);
     }
 
     @Override

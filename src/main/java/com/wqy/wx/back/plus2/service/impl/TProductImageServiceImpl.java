@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TProductImage;
 import com.wqy.wx.back.plus2.mapper.TProductImageMapper;
 import com.wqy.wx.back.plus2.service.ITProductImageService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -21,25 +23,29 @@ import java.util.List;
 @Service
 public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, TProductImage> implements ITProductImageService {
 
+    @Autowired
+    private TProductImageMapper tProductImageMapper;
 
     @Override
-    public List<TProductImage> searchAll() {
-        return null;
+    public List<TProductImage> searchAll(String id) {
+        return tProductImageMapper.searchByID(id);
     }
 
     @Override
     public void deleteProductImage(String id) {
-
+        //此处拿到的是实际ID
+        tProductImageMapper.deleteById(id);
     }
 
     @Override
     public void insertProductImage(TProductImage tProductImage) {
-
+        tProductImageMapper.insert(tProductImage);//图片应带有ID 故不在生成
     }
 
     @Override
     public void updateProductImage(TProductImage tProductImage) {
-
+        tProductImageMapper.deleteById(tProductImage.getId());
+        tProductImageMapper.insert(tProductImage);
     }
 
     @Override
@@ -48,17 +54,32 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
-    public void updateProductImage(List<TProductImage> list) {
-
+    public Boolean updateProductImage(List<TProductImage> list) {
+        if (list.size()>0){
+        for (TProductImage tProductImage : list) {
+            tProductImageMapper.deleteById(tProductImage.getId());
+            tProductImageMapper.insert(tProductImage);
+        }}
+        return true;
     }
 
     @Override
-    public void insertProductImage(List<TProductImage> list) {
-
+    public Boolean insertProductImage(List<TProductImage> list) {
+        if(list.size()>0){
+            for (TProductImage tProductImage : list) {
+                tProductImageMapper.insert(tProductImage);
+            }
+        }
+        return true;
     }
 
     @Override
-    public void deleteProductImage(List<String> id) {
-
+    public Boolean deleteProductImage(List<String> id) {
+        if(id.size()>0){
+            for (String pId : id) {
+                tProductImageMapper.deleteById(pId);
+            }
+        }
+        return true;
     }
 }

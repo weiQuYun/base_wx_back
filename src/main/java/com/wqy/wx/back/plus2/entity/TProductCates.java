@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author licm
@@ -39,5 +40,11 @@ public class TProductCates extends BaseEntity<TProductCates> implements Serializ
     @ApiModelProperty(value = "分类组")
     @TableField(value = "class_id", fill = FieldFill.INSERT_UPDATE)
     private Integer classId;
+
+    /**
+     * 商品集
+     * **/
+    @TableField(exist = false)
+    private List<TProduct> tProductList;
 
 }

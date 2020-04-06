@@ -1,5 +1,6 @@
 package com.wqy.wx.back.plus2.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wqy.wx.back.plus2.entity.TProductCates;
 
@@ -15,15 +16,15 @@ import java.util.List;
  */
 public interface ITProductCatesService extends IService<TProductCates> {
 
-    void searchAll();
+    List<TProductCates> searchAll();
 
-    void deleteProductCates(String id);
+    Boolean deleteProductCates(String id);
 
-    void insertProductCates(TProductCates tProductCates);
+    Boolean insertProductCates(TProductCates tProductCates);
 
-    void updateProductCates(TProductCates tProductCates);
+    Boolean updateProductCates(TProductCates tProductCates);
 
-    void searchAll(int page, int size);
+    Page<TProductCates> searchAll(int page, int size);
 
     void updateProductCates(List<TProductCates> list);
 

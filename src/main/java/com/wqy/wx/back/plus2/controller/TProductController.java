@@ -23,8 +23,8 @@ public class TProductController {
 
     @GetMapping("/list")
     @ApiOperation("获取全部")
-    public void getProductAll() {
-        itProductService.searchAll();
+    public List<TProduct> getProductAll(TProduct tProduct) {
+        return itProductService.searchAll(tProduct);
     }
 
     @DeleteMapping("/{id}")

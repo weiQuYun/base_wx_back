@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ITProductService extends IService<TProduct> {
 
-    List<TProduct> searchAll();
+    List<TProduct> searchAll(TProduct tProduct);
 
     void deleteProduct(String id);
 

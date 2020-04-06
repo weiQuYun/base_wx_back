@@ -3,6 +3,9 @@ package com.wqy.wx.back.plus2.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wqy.wx.back.plus2.entity.TProduct;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,6 @@ import org.apache.ibatis.annotations.Delete;
  */
 public interface TProductMapper extends BaseMapper<TProduct> {
 
-
+    @Select("select * from t_product where cid = #{classid}")
+    List<TProduct> searchProductByCatesId(Integer classid);
 }

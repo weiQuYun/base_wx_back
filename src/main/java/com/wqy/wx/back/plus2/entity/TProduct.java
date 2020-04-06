@@ -92,7 +92,16 @@ public class TProduct extends BaseEntity<TProduct> implements Serializable {
     @TableField(value = "pro_out", fill = FieldFill.INSERT_UPDATE)
     private Integer proOut;
 
+    /**
+     * 图片URL集
+     * **/
+    @TableField(exist = false)
+    private List<TProductImage> product_image;
 
-    private List<String> product_image;
+    /**
+     * 商品详情页
+     * **/
+    @TableField(exist = false)
+    private TProductContents tProductContents;
 
 }
