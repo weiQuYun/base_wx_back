@@ -1,7 +1,10 @@
 package com.wqy.wx.back.plus2.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.wx.back.common.Constant;
+import com.wqy.wx.back.common.util.dozer.IGenerator;
 import com.wqy.wx.back.plus2.entity.TUser;
 import com.wqy.wx.back.plus2.service.ITUserService;
 import io.swagger.annotations.Api;
@@ -24,9 +27,12 @@ public class TUserController {
 
     @GetMapping("/list")
     @ApiOperation("获取全部")
-    public List<TUser> getTUserAll(TUser tUser) {
+    public TUser getTUserAll(TUser tUser) {
         return itUserService.searchAll(tUser);
+
     }
+
+
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
@@ -36,13 +42,13 @@ public class TUserController {
 
     @PostMapping("")
     @ApiOperation("添加")
-    public Boolean addTUser(@RequestParam TUser tUser) {
+    public Boolean addTUser(@RequestBody TUser tUser) {
         return itUserService.insertTUser(tUser);
     }
 
     @PutMapping("")
     @ApiOperation("修改")
-    public Boolean updateTUser(@RequestParam TUser tUser) {
+    public Boolean updateTUser(@RequestBody TUser tUser) {
         return itUserService.updateTUser(tUser);
     }
 
@@ -54,12 +60,12 @@ public class TUserController {
     //以下不存在
     @PutMapping("/batch")
     @ApiOperation("批量修改")
-    public Boolean updateTUserBatch(@RequestParam List<TUser> list){
+    public Boolean updateTUserBatch(@RequestBody List<TUser> list){
         return itUserService.updateTUser(list);
     }
     @PostMapping("/batch")
     @ApiOperation("批量添加")
-    public Boolean addTUserBatch(@RequestParam List<TUser> list){
+    public Boolean addTUserBatch(@RequestBody List<TUser> list){
         return itUserService.insertTUser(list);
     }
     @DeleteMapping("/delete/{id}")

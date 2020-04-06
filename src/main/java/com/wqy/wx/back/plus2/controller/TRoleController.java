@@ -27,42 +27,43 @@ public class TRoleController {
         return itRoleService.searchAll();
     }
 
-    @DeleteMapping("/{id}")
-    @ApiOperation("删除")
-    public void deleteTRole(@PathVariable String id) {
-        itRoleService.deleteTRole(id);
-    }
-
-    @PostMapping("")
-    @ApiOperation("添加")
-    public void addTRole(@RequestParam TRole tRole) {
-        itRoleService.insertTRole(tRole);
-    }
-
-    @PutMapping("")
-    @ApiOperation("修改")
-    public void updateTRole(@RequestParam TRole tRole) {
-        itRoleService.updateTRole(tRole);
-    }
-
-    @GetMapping("/page/{page}/{size}")
-    @ApiOperation("分页查询")
-    public void searchTRolePage(@PathVariable int page, @PathVariable int size) {
-        itRoleService.searchAll(page, size);
-    }
-    @PutMapping("/batch")
-    @ApiOperation("批量修改")
-    public void updateTRoleBatch(@RequestParam List<TRole> list){
-        itRoleService.updateTRole(list);
-    }
-    @PostMapping("/batch")
-    @ApiOperation("批量添加")
-    public void addTRoleBatch(@RequestParam List<TRole> list){
-        itRoleService.insertTRole(list);
-    }
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation("批量删除")
-    public void deleteTRoleBatch(@PathVariable List<String> id){
-        itRoleService.deleteTRole(id);
-    }
+//暂定不更改用户组 故未实现以下method
+//    @DeleteMapping("/{id}")
+//    @ApiOperation("删除")
+//    public void deleteTRole(@PathVariable String id) {
+//        itRoleService.deleteTRole(id);
+//    }
+//
+//    @PostMapping("")
+//    @ApiOperation("添加")
+//    public void addTRole(@RequestBody TRole tRole) {
+//        itRoleService.insertTRole(tRole);
+//    }
+//
+//    @PutMapping("")
+//    @ApiOperation("修改")
+//    public void updateTRole(@RequestBody TRole tRole) {
+//        itRoleService.updateTRole(tRole);
+//    }
+//
+//    @GetMapping("/page/{page}/{size}")
+//    @ApiOperation("分页查询")
+//    public void searchTRolePage(@PathVariable int page, @PathVariable int size) {
+//        itRoleService.searchAll(page, size);
+//    }
+//    @PutMapping("/batch")
+//    @ApiOperation("批量修改")
+//    public void updateTRoleBatch(@RequestBody List<TRole> list){
+//        itRoleService.updateTRole(list);
+//    }
+//    @PostMapping("/batch")
+//    @ApiOperation("批量添加")
+//    public void addTRoleBatch(@RequestBody List<TRole> list){
+//        itRoleService.insertTRole(list);
+//    }
+//    @DeleteMapping("/delete/{id}")
+//    @ApiOperation("批量删除")
+//    public void deleteTRoleBatch(@PathVariable List<String> id){
+//        itRoleService.deleteTRole(id);
+//    }
 }

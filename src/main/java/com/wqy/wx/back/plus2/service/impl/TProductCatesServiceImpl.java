@@ -42,7 +42,7 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
         List<TProductCates> tProductCates = tProductCatesMapper.selectList(null);
         //查询所有商品封装
         for (TProductCates tProductCate : tProductCates) {
-            Integer classId = tProductCate.getClassId();
+            String classId = tProductCate.getId();
             List<TProduct> list = tProductMapper.searchProductByCatesId(classId);
             for (TProduct tProduct : list) {
                 //查询所有商品详情封装
@@ -57,8 +57,10 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
 
     @Override
     public Boolean deleteProductCates(String id) {
+        if (id.isEmpty()){
         tProductCatesMapper.deleteById(id);
-        return true;
+        return true;}
+        else return true;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class TProductCatesServiceImpl extends ServiceImpl<TProductCatesMapper, T
         List<TProductCates> records = tProductCates.getRecords();//获取数据
         //查询所有商品封装
         for (TProductCates tProductCate : records) {
-            Integer classId = tProductCate.getClassId();
+            String classId = tProductCate.getId();
             List<TProduct> list = tProductMapper.searchProductByCatesId(classId);
             for (TProduct tProduct : list) {
                 //查询所有商品详情封装

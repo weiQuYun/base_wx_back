@@ -22,7 +22,7 @@ public class TProductContentsController {
     private ITProductContentsService itProductContentsService;
 
     @GetMapping("/list/{id}")
-    @ApiOperation("获取全部")
+    @ApiOperation("获取全部实际上只能获取单个商品的 获取全部没有意义")
     public TProductContents getProductContentsAll(@PathVariable String id) {
         return itProductContentsService.searchAll(id);
     }
@@ -35,35 +35,35 @@ public class TProductContentsController {
 
     @PostMapping("")
     @ApiOperation("添加")
-    public Boolean addProductContents(@RequestParam TProductContents tProductContents) {
+    public Boolean addProductContents(@RequestBody TProductContents tProductContents) {
         return itProductContentsService.insertProductContents(tProductContents);
     }
 
     @PutMapping("")
     @ApiOperation("修改")
-    public Boolean updateProductContents(@RequestParam TProductContents tProductContents) {
+    public Boolean updateProductContents(@RequestBody TProductContents tProductContents) {
         return itProductContentsService.updateProductContents(tProductContents);
     }
 
     //以下不存在
-    @GetMapping("/page/{page}/{size}")
-    @ApiOperation("分页查询")
-    public void seachProductContentsPage(@PathVariable int page, @PathVariable int size) {
-        itProductContentsService.searchAll(page, size);
-    }
-    @PutMapping("/batch")
-    @ApiOperation("批量修改")
-    public void updateProductContentsBatch(@RequestParam List<TProductContents> list){
-        itProductContentsService.updateProductContents(list);
-    }
-    @PostMapping("/batch")
-    @ApiOperation("批量添加")
-    public void addProductContentsBatch(@RequestParam List<TProductContents> list){
-        itProductContentsService.insertProductContents(list);
-    }
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation("批量删除")
-    public void deleteProductContentsBatch(@PathVariable List<String> id){
-        itProductContentsService.deleteProductContents(id);
-    }
+//    @GetMapping("/page/{page}/{size}")
+//    @ApiOperation("分页查询")
+//    public void seachProductContentsPage(@PathVariable int page, @PathVariable int size) {
+//        itProductContentsService.searchAll(page, size);
+//    }
+//    @PutMapping("/batch")
+//    @ApiOperation("批量修改")
+//    public void updateProductContentsBatch(@RequestBody List<TProductContents> list){
+//        itProductContentsService.updateProductContents(list);
+//    }
+//    @PostMapping("/batch")
+//    @ApiOperation("批量添加")
+//    public void addProductContentsBatch(@RequestBody List<TProductContents> list){
+//        itProductContentsService.insertProductContents(list);
+//    }
+//    @DeleteMapping("/delete/{id}")
+//    @ApiOperation("批量删除")
+//    public void deleteProductContentsBatch(@PathVariable List<String> id){
+//        itProductContentsService.deleteProductContents(id);
+//    }
 }

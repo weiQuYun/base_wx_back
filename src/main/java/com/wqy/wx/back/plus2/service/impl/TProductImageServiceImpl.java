@@ -1,7 +1,9 @@
 package com.wqy.wx.back.plus2.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.plus2.entity.TProductImage;
+import com.wqy.wx.back.plus2.entity.TUser;
 import com.wqy.wx.back.plus2.mapper.TProductImageMapper;
 import com.wqy.wx.back.plus2.service.ITProductImageService;
 import io.swagger.annotations.ApiOperation;
@@ -32,20 +34,23 @@ public class TProductImageServiceImpl extends ServiceImpl<TProductImageMapper, T
     }
 
     @Override
-    public void deleteProductImage(String id) {
+    public Boolean deleteProductImage(String id) {
         //此处拿到的是实际ID
         tProductImageMapper.deleteById(id);
+        return true;
     }
 
     @Override
-    public void insertProductImage(TProductImage tProductImage) {
-        tProductImageMapper.insert(tProductImage);//图片应带有ID 故不在生成
+    public Boolean insertProductImage(TProductImage tProductImage) {
+       tProductImageMapper.insert(tProductImage);//图片应带有ID 故不在生成
+        return true;
     }
 
     @Override
-    public void updateProductImage(TProductImage tProductImage) {
+    public Boolean updateProductImage(TProductImage tProductImage) {
         tProductImageMapper.deleteById(tProductImage.getId());
         tProductImageMapper.insert(tProductImage);
+        return true;
     }
 
     @Override

@@ -36,13 +36,13 @@ public class TProductCatesController {
 
     @PostMapping("")
     @ApiOperation("添加")
-    public Boolean addProductCates(@RequestParam TProductCates tProductCates) {
+    public Boolean addProductCates(@RequestBody TProductCates tProductCates) {
        return itProductCatesService.insertProductCates(tProductCates);
     }
 
     @PutMapping("")
     @ApiOperation("修改")
-    public Boolean updateProductCates(@RequestParam TProductCates tProductCates) {
+    public Boolean updateProductCates(@RequestBody TProductCates tProductCates) {
         return itProductCatesService.updateProductCates(tProductCates);
     }
 
@@ -53,13 +53,13 @@ public class TProductCatesController {
     }
     @PutMapping("/batch")
     @ApiOperation("批量修改")
-    public Boolean updateProductCatesBatch(@RequestParam List<TProductCates> list){
+    public Boolean updateProductCatesBatch(@RequestBody List<TProductCates> list){
         itProductCatesService.updateProductCates(list);
         return true;
     }
     @PostMapping("/batch")
     @ApiOperation("批量添加")
-    public Boolean addProductCatesBatch(@RequestParam List<TProductCates> list){
+    public Boolean addProductCatesBatch(@RequestBody List<TProductCates> list){
         itProductCatesService.insertProductCates(list);
         return true;
     }

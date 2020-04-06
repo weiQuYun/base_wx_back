@@ -96,12 +96,12 @@ public class TProduct extends BaseEntity<TProduct> implements Serializable {
      * 图片URL集
      * **/
     @TableField(exist = false)
-    private List<TProductImage> product_image;
+    private List<TProductImage> product_image = null;
 
     /**
      * 商品详情页
      * **/
     @TableField(exist = false)
-    private TProductContents tProductContents;
+    private TProductContents tProductContents = null;
 
 }

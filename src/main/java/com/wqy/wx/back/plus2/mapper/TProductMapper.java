@@ -18,5 +18,5 @@ import java.util.List;
 public interface TProductMapper extends BaseMapper<TProduct> {
 
     @Select("select * from t_product where cid = #{classid}")
-    List<TProduct> searchProductByCatesId(Integer classid);
+    List<TProduct> searchProductByCatesId(String classid);
 }

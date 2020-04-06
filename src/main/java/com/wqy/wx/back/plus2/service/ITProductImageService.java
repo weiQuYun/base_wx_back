@@ -17,11 +17,11 @@ public interface ITProductImageService extends IService<TProductImage> {
 
     List<TProductImage> searchAll(String id);
 
-    void deleteProductImage(String id);
+    Boolean deleteProductImage(String id);
 
-    void insertProductImage(TProductImage tProductImage);
+    Boolean insertProductImage(TProductImage tProductImage);
 
-    void updateProductImage(TProductImage tProductImage);
+    Boolean updateProductImage(TProductImage tProductImage);
 
     void searchAll(int page, int size);
 

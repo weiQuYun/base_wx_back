@@ -29,24 +29,26 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     private TUserMapper tUserMapper;
 
     @Override
-    public List<TUser> searchAll(TUser tUser) {
-        return null;
+    public TUser searchAll(TUser tUser) {
+        return tUserMapper.selectById(tUser.getId());
     }
 
     @Override
     public Boolean deleteTUser(String id) {
-        if (id.isEmpty()){
+        if (id.isEmpty()) {
             return false;
-        }
+        }//实际中ID为UUID
         tUserMapper.deleteById(id);
         return true;
     }
 
     @Override
     public Boolean insertTUser(TUser tUser) {
-        tUser.setId(UUIDUtils.getCharAndNumr());
-        tUserMapper.insert(tUser);
-        return true;
+        if (tUserMapper.selectByUserName(tUser.getUserName()).size() < 1) {
+            tUser.setId(UUIDUtils.getCharAndNumr());//此处添加UUID
+            tUserMapper.insert(tUser);
+            return true;
+        } else return false;
     }
 
     @Override
@@ -57,8 +59,13 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
 
     @Override
     public Page<TUser> searchAll(int page, int size) {
-        Page<TUser> tUserPage = tUserMapper.selectPage(new Page<>(page, size), null);
-        return tUserPage;
+        if (page > 0 && size > 5) {
+            Page<TUser> tUserPage = tUserMapper.selectPage(new Page<>(page, size), null);
+            return tUserPage;
+        } else {
+            Page<TUser> tUserPage = tUserMapper.selectPage(new Page<>(1, 20), null);
+            return tUserPage;
+        }
     }
 
     @Override
