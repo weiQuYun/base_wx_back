@@ -29,6 +29,7 @@ public class TRoleServiceImpl extends ServiceImpl<TRoleMapper, TRole> implements
         return tRoleMapper.selectList(null);
     }
 
+    /**以下方法感觉不到使用地点未实装**/
     @Override
     public void deleteTRole(String id) {
 

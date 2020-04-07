@@ -3,6 +3,7 @@ package com.wqy.wx.back.plus2.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.common.util.page.PageDTO;
+import com.wqy.wx.back.plus2.entity.TCart;
 import com.wqy.wx.back.plus2.entity.TOrder;
 import com.wqy.wx.back.plus2.service.ITOrderService;
 import io.swagger.annotations.Api;
@@ -33,20 +34,22 @@ public class TOrderController {
     public Page<TOrder> getPage(TOrder tOrder, PageDTO pageDTO) {
         return itOrderService.getPage( tOrder,pageDTO);
     }
+    //这是订单生成入口
     @PostMapping("")
-    @ApiOperation("保存数据")
-    public boolean save(@RequestBody TOrder tOrder) {
-        return itOrderService.save( tOrder);
+    @ApiOperation("新建数据")
+    public boolean save(@RequestBody List<TCart> tCartList) {
+        return itOrderService.insertOrder(tCartList);
     }
-    @PostMapping("/batch")
-    @ApiOperation("批量保存")
-    public boolean saveBatch(@RequestBody List<TOrder> tOrders) {
-        return itOrderService.saveBatch( tOrders);
-    }
+//    @PostMapping("/batch")
+//    @ApiOperation("批量保存")
+//    public boolean saveBatch(@RequestBody List<TOrder> tOrders) {
+//        return itOrderService.saveBatch( tOrders);
+//    }
+    //正式生成订单使用修改
     @PutMapping("")
     @ApiOperation("修改")
     public boolean update(@RequestBody TOrder tOrders) {
-        return itOrderService.updateById( tOrders);
+        return itOrderService.updateById(tOrders);
     }
     @PutMapping("/batch")
     @ApiOperation("批量修改")

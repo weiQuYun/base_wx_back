@@ -4,10 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.common.util.ParamUtils;
+import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.common.util.page.PageDTO;
 import com.wqy.wx.back.plus2.entity.TCart;
+import com.wqy.wx.back.plus2.entity.TMenber;
+import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.mapper.TCartMapper;
+import com.wqy.wx.back.plus2.mapper.TProductMapper;
 import com.wqy.wx.back.plus2.service.ITCartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +30,16 @@ import java.util.List;
 @Service
 public class TCartServiceImpl extends ServiceImpl<TCartMapper, TCart> implements ITCartService {
 
+    @Autowired
+    private TCartMapper tCartMapper;
+    @Autowired
+    private TProductMapper tProductMapper;
     @Override
-    public List<TCart> getList(TCart tCart) {
-        QueryWrapper<TCart>  query = new QueryWrapper<>();
-        query = ParamUtils.reflect(tCart,query);
-        return this.list(query);
+    public List<TCart> getList(TMenber tMenber) {
+        //通过tMenberID 查询该用户所有的购物车
+        List<TCart> tCartList = tCartMapper.selectBytMenberId(tMenber.getId());
+        //暂定直接返回 有需要再更改
+        return tCartList;
     }
 
     @Override
@@ -38,5 +48,13 @@ public class TCartServiceImpl extends ServiceImpl<TCartMapper, TCart> implements
         query = ParamUtils.reflect(tCart,query);
         Page<TCart> page = new Page<>(pageDTO.getPageIndex(),pageDTO.getPageSize());
         return this.page(page,query);
+    }
+
+    @Override
+    public boolean insertTCart(TCart tCart) {
+        //新增tcart 此处应赋予UUID
+        tCart.setId(UUIDUtils.getCharAndNumr());
+        tCartMapper.insert(tCart);
+        return true;
     }
 }

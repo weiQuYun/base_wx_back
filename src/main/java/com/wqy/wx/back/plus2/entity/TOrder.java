@@ -50,7 +50,7 @@ public class TOrder extends BaseEntity<TOrder> implements Serializable {
      */
     @ApiModelProperty(value = "会员ID")
     @TableField(value = "menber_id", fill = FieldFill.INSERT_UPDATE)
-    private Long menberId;
+    private String menberId;
     /**
      * 支付状态
      */
@@ -69,6 +69,7 @@ public class TOrder extends BaseEntity<TOrder> implements Serializable {
     @ApiModelProperty(value = "支付成功返回单号")
     @TableField(value = "ali_order_id", fill = FieldFill.INSERT_UPDATE)
     private Long aliOrderId;
+
     /**
      * 物流公司
      */
@@ -81,5 +82,11 @@ public class TOrder extends BaseEntity<TOrder> implements Serializable {
     @ApiModelProperty(value = "物流单号")
     @TableField(value = "number", fill = FieldFill.INSERT_UPDATE)
     private String number;
+    /**
+     * 留言字段
+     * **/
+    @ApiModelProperty(value = "留言字段")
+    @TableField(value = "message",fill = FieldFill.INSERT_UPDATE)
+    private String message;
 
 }

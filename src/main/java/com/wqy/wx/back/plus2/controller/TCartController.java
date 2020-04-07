@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.common.util.page.PageDTO;
 import com.wqy.wx.back.plus2.entity.TCart;
+import com.wqy.wx.back.plus2.entity.TMenber;
 import com.wqy.wx.back.plus2.service.ITCartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,29 +27,32 @@ public class TCartController {
 
     @GetMapping("/list")
     @ApiOperation("条件获取数据")
-    public List<TCart> getList(TCart tCart) {
-        return itCartService.getList( tCart);
+    public List<TCart> getList(TMenber tMenber) {
+        return itCartService.getList( tMenber);
     }
-    @GetMapping("/page")
-    @ApiOperation("条件获取分页数据")
-    public Page<TCart> getPage(TCart tCart, PageDTO pageDTO) {
-        return itCartService.getPage( tCart,pageDTO);
-    }
+    //暂时想不到购物车分页情况不做分页 此方法未实现
+//    @GetMapping("/page")
+//    @ApiOperation("条件获取分页数据")
+//    public Page<TCart> getPage(TCart tCart, PageDTO pageDTO) {
+//        return itCartService.getPage( tCart,pageDTO);
+//    }
     @PostMapping("")
     @ApiOperation("保存数据")
     public boolean save(@RequestBody TCart tCart) {
-        return itCartService.save( tCart);
+        return itCartService.insertTCart( tCart);
     }
     @PostMapping("/batch")
     @ApiOperation("批量保存")
     public boolean saveBatch(@RequestBody List<TCart> tCarts) {
         return itCartService.saveBatch( tCarts);
     }
+    //每修改一次购物车都得发一个ajax
     @PutMapping("")
     @ApiOperation("修改")
     public boolean update(@RequestBody TCart tCarts) {
         return itCartService.updateById( tCarts);
     }
+    //不存在批量修改
     @PutMapping("/batch")
     @ApiOperation("批量修改")
     public boolean updateBatch(@RequestBody List<TCart> tCarts) {

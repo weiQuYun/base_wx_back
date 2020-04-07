@@ -34,6 +34,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         return tUserMapper.selectById(tUser.getId());
     }
 
+    /**
+     * 删除后台用户
+     * **/
     @Override
     @Transactional
     public Boolean deleteTUser(String id) {
@@ -43,7 +46,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         tUserMapper.deleteById(id);
         return true;
     }
-
+    /**
+     * 新增后台用户
+     * **/
     @Override
     @Transactional
     public Boolean insertTUser(TUser tUser) {
@@ -53,7 +58,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
             return true;
         } else return false;
     }
-
+    /**
+     * 修改后台用户
+     * **/
     @Override
     @Transactional
     public Boolean updateTUser(TUser tUser) {
@@ -61,6 +68,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         return true;
     }
 
+    /**
+     *分页查询 此处默认如果分页低于 1-5 默认使用1-20
+     * **/
     @Override
     public Page<TUser> searchAll(int page, int size) {
         if (page > 0 && size > 5) {
@@ -72,6 +82,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
         }
     }
 
+    /**
+     * 以下方法暂时感觉不到用得上未实装
+     * **/
     @Override
     @Transactional
     public Boolean insertTUser(List<TUser> list) {

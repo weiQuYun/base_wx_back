@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author licm
@@ -45,5 +46,11 @@ public class TCart extends BaseEntity<TCart> implements Serializable {
     @ApiModelProperty(value = "商品数量")
     @TableField(value = "procute_number", fill = FieldFill.INSERT_UPDATE)
     private Integer procuteNumber;
+
+//    /**
+//     * 商品表 减少ajax发送 查询购物车 默认查询购物车商品详情一起返回
+//     * **/
+//    @TableField(exist = false)
+//    private List<TProduct> tProductList;
 
 }

@@ -3,6 +3,7 @@ package com.wqy.wx.back.plus2.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wqy.wx.back.common.util.ParamUtils;
 import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.common.util.dozer.IGenerator;
 import com.wqy.wx.back.plus2.entity.TProduct;
@@ -50,7 +51,9 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * **/
     @Override
     public List<TProduct> searchAll(TProduct tProduct) {
-        return tProductMapper.selectList(null);
+        QueryWrapper<TProduct> queryMrapper = new QueryWrapper<TProduct>();
+        QueryWrapper<TProduct> reflect = ParamUtils.reflect(tProduct, queryMrapper);
+        return tProductMapper.selectList(reflect);
     }
 
     /**

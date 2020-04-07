@@ -52,5 +52,10 @@ public class TOrderInfo extends BaseEntity<TOrderInfo> implements Serializable {
     @ApiModelProperty(value = "优惠金额")
     @TableField(value = "discount_amount", fill = FieldFill.INSERT_UPDATE)
     private BigDecimal discountAmount;
+    @ApiModelProperty(value = "商品数量")
+    @TableField(value = "product_number",fill = FieldFill.INSERT_UPDATE)
+    private Integer product_number;
+    @TableField(exist = false)
+    private TProduct tProduct;
 
 }
