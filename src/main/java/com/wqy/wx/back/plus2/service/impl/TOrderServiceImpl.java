@@ -15,9 +15,11 @@ import com.wqy.wx.back.plus2.mapper.TOrderMapper;
 import com.wqy.wx.back.plus2.mapper.TProductMapper;
 import com.wqy.wx.back.plus2.service.ITOrderService;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -56,6 +58,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
     }
 
     @Override
+    @Transactional
     public TOrder insertOrder(List<TCart> tCartList) {
         //获取了所有的购物车信息即商品iD
         //判断下是不是垃圾数据
@@ -77,6 +80,11 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
             //拉取每一个购物车生成订单详情
             String procuteId = tCart.getProcuteId();//获取商品ID 通过商品ID 查询商品详情填充详情页
             TProduct tProduct = tProductMapper.selectById(procuteId);
+            //此处增加库存判定
+            if (!updateNumber(tOrder)){
+                new Exception("库存异常");
+            }
+            //以上
             TOrderInfo tOrderInfo = new TOrderInfo();//填充详情页
             tOrderInfo.setOrderId(orderUUID);
             tOrderInfo.setProductId(procuteId);
@@ -90,5 +98,51 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
         //保存订单页
         tOrderMapper.insert(tOrder);
         return tOrderMapper.selectByOrderNumber(tOrder.getOrderNumber());
+    }
+
+    /**
+     * 订单修改及其后续商品数量操作
+     * 生成订单时已经判定库存问题
+     * **/
+    @Override
+    public boolean updateByOrderId(TOrder tOrders) {
+        //主要实现库存修改
+        if (tOrders.getPayStatus()>0) {
+            //已经付款 去库存
+            String orderNumber = tOrders.getOrderNumber();//订单号
+            List<TOrderInfo> tOrderInfoList = tOrderInfoMapper.searchByOrderNumber(orderNumber);//获取所有下单商品
+            for (TOrderInfo tOrderInfo : tOrderInfoList) {
+                if (!updateNumber(tOrders)){
+                    new Exception("库存异常");
+                }
+                String productId = tOrderInfo.getProductId();//获取商品ID
+                Integer product_number = tOrderInfo.getProduct_number();//获取商品数量
+                TProduct tProduct = tProductMapper.selectById(productId);
+                Integer proNumber = tProduct.getProNumber();
+                tProduct.setProNumber(proNumber-product_number);//去库存
+                tProduct.setProOut(tProduct.getProOut()+product_number);//加销量
+                tProductMapper.updateById(tProduct);//修改
+            }
+            tOrderMapper.updateById(tOrders);//修改订单表
+        }
+        //以上实现库存修改
+        else {
+            //未付款正常订单项填充直接改订单
+            tOrderMapper.updateById(tOrders);
+        }
+        return false;
+    }
+
+    /**
+     * 库存判断
+     * **/
+    public Boolean updateNumber(TOrder tOrder){
+        List<TOrderInfo> tOrderInfoList = tOrderInfoMapper.searchByOrderNumber(tOrder.getOrderNumber());//获取所有下单
+        for (TOrderInfo tOrderInfo : tOrderInfoList) {
+            if(tProductMapper.selectById(tOrderInfo.getProductId()).getProNumber()-tOrderInfo.getProduct_number()<0){
+                return false;
+            }
+        }
+        return true;
     }
 }

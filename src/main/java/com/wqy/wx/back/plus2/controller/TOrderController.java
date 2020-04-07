@@ -49,8 +49,10 @@ public class TOrderController {
     @PutMapping("")
     @ApiOperation("修改")
     public boolean update(@RequestBody TOrder tOrders) {
-        return itOrderService.updateById(tOrders);
+        return itOrderService.updateByOrderId(tOrders);
     }
+
+        //以下暂时未实现 删除应该能用
     @PutMapping("/batch")
     @ApiOperation("批量修改")
     public boolean updateBatch(@RequestBody List<TOrder> tOrders) {

@@ -34,4 +34,5 @@ public interface ITOrderService extends IService<TOrder> {
 
     TOrder insertOrder(List<TCart> tCartList);
 
+    boolean updateByOrderId(TOrder tOrders);
 }

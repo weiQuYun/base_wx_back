@@ -24,7 +24,7 @@ public class TOrderInfoController {
     private ITOrderInfoService itOrderInfoService;
 
     @GetMapping("/list")
-    @ApiOperation("条件获取数据")//此处应该只发送产品ID 返回结果为
+    @ApiOperation("条件获取数据,需要通过店ID查询")//此处应该只发送产品ID 返回结果为
     public List<TOrderInfo> getList(TOrderInfo tOrderInfo) {
         return itOrderInfoService.getList( tOrderInfo);
     }
