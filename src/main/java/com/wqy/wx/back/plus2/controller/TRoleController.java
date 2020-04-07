@@ -16,14 +16,18 @@ import java.util.List;
  */
 @Api(tags = "角色权限接口管理")
 @RestController
-@RequestMapping(Constant.MAPPING + "role")
+@RequestMapping(Constant.MAPPING + "/role")
 public class TRoleController {
     @Autowired
     private ITRoleService itRoleService;
 
+    /**
+     * 测试通过
+     * **/
     @GetMapping("/list")
     @ApiOperation("获取全部")
     public List<TRole> getTRoleAll() {
+        System.out.println("1321231321");
         return itRoleService.searchAll();
     }
 

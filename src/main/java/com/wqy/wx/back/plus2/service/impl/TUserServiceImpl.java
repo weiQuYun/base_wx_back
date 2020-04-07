@@ -30,8 +30,8 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
     private TUserMapper tUserMapper;
 
     @Override
-    public TUser searchAll(TUser tUser) {
-        return tUserMapper.selectById(tUser.getId());
+    public List<TUser> searchAll( ) {
+        return tUserMapper.selectList(null);
     }
 
     /**

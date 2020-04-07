@@ -64,4 +64,6 @@ public class TUser extends BaseEntity<TUser> implements Serializable {
     @TableField(value = "address", fill = FieldFill.INSERT_UPDATE)
     private String address;
 
+
+
 }

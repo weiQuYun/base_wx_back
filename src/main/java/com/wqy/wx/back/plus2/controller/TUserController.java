@@ -25,33 +25,59 @@ public class TUserController {
     @Autowired
     private ITUserService itUserService;
 
-    @GetMapping("/list")
+    /**
+     * 接口测试通过
+     * url:/api/wqy/user/search
+     * return 所有用户数据
+     * **/
+    @GetMapping("/search")
     @ApiOperation("获取全部")
-    public TUser getTUserAll(TUser tUser) {
-        return itUserService.searchAll(tUser);
-
+    public List<TUser> getTUserAll() {
+        return itUserService.searchAll();
+    }
+    /**
+     * 接口测试通过
+     * url：/api/wqy/user/{id}
+     * return id用户数据
+     * **/
+    @GetMapping("/{id}")
+    public TUser getTUser(@PathVariable Integer id){
+        return itUserService.getById(id);
     }
 
-
-
+    /**
+     * 测试通过 删除ID 数据
+     * **/
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
     public Boolean deleteTUser(@PathVariable String id) {
         return itUserService.deleteTUser(id);
     }
-
+    /**
+     * 测试通过 post接受TUser
+     * url /api/wqy/user
+     * 实现已注入UUID 传什么ID 不重要
+     * 新增用户默认建立店铺
+     * **/
     @PostMapping("")
     @ApiOperation("添加")
     public Boolean addTUser(@RequestBody TUser tUser) {
         return itUserService.insertTUser(tUser);
     }
 
+    /**
+     * 测试通过 实际是通过ID修改 ID 值不可更改！！！
+     * url：/api/way/user
+     * **/
     @PutMapping("")
     @ApiOperation("修改")
     public Boolean updateTUser(@RequestBody TUser tUser) {
         return itUserService.updateTUser(tUser);
     }
 
+    /**
+     * 测试通过
+     * **/
     @GetMapping("/page/{page}/{size}")
     @ApiOperation("分页查询")
     public Page<TUser> searchTUserPage(@PathVariable int page, @PathVariable int size)  {

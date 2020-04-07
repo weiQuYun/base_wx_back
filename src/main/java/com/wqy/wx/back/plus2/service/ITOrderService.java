@@ -32,6 +32,6 @@ public interface ITOrderService extends IService<TOrder> {
      */
     Page<TOrder> getPage(TOrder tOrder, PageDTO pageDTO);
 
-    boolean insertOrder(List<TCart> tCartList);
+    TOrder insertOrder(List<TCart> tCartList);
 
 }

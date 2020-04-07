@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface TProductImageMapper extends BaseMapper<TProductImage> {
 
-    @Delete("delete from t_product_image where product_id = @{id}")
+    @Delete("delete from t_product_image where product_id = #{id}")
     void deleteProduct(String id);
 
     @Select("select * from t_product_image where product_id = #{id}")

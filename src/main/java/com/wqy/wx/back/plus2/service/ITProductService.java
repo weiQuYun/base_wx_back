@@ -30,6 +30,6 @@ public interface ITProductService extends IService<TProduct> {
 
     void updateProduct(List<TProduct> list);
 
-    Page<TProduct> searchAll(int page, int size);
+    Page<TProduct> searchAll(int page, int size,TProduct tProduct);
 
 }

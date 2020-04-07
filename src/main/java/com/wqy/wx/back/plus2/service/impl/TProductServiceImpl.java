@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.common.util.ParamUtils;
 import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.common.util.dozer.IGenerator;
+import com.wqy.wx.back.plus2.entity.THotel;
 import com.wqy.wx.back.plus2.entity.TProduct;
 import com.wqy.wx.back.plus2.entity.TProductCates;
 import com.wqy.wx.back.plus2.entity.TProductImage;
@@ -42,7 +43,7 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
     @Autowired
     private TCommentMapper tCommentMapper;
     @Autowired
-    private TProductCatesMapper tProductCatesMapper;
+    private TProductContentsMapper tProductContentsMapper;
     @Autowired
     IGenerator generator;
 
@@ -118,8 +119,10 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
      * **/
     @Override
 
-    public Page<TProduct> searchAll(int page, int size) {
-        return tProductMapper.selectPage(new Page<>(page, size), null);
+    public Page<TProduct> searchAll(int page, int size,TProduct tProduct) {
+        QueryWrapper<TProduct> queryMrapper = new QueryWrapper<TProduct>();
+        QueryWrapper<TProduct> reflect = ParamUtils.reflect(tProduct, queryMrapper);
+        return tProductMapper.selectPage(new Page<>(page, size), reflect);
     }
 
     private Boolean deleteProduct_(List<String> list) {
@@ -128,17 +131,16 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
         for (int i = 0; i < list.size(); i++) {
             //删除购物车中的本商品
             tCartMapper.deleteProduct(list.get(i));
-            //删除店铺中的本商品
-            tHotelMapper.deleteProduct(list.get(i));
+//            //删除店铺中的本商品
+//            tHotelMapper.deleteProduct(list.get(i));
             //删除商品图片
             tProductImageMapper.deleteProduct(list.get(i));
             //删除详情描述
-            tProductCatesMapper.deleteProduct(list.get(i));
+            tProductContentsMapper.deleteById(list.get(i));
             //删除评论投诉
             tCommentMapper.deleteProduct(list.get(i));
             //删除商品
-            TProduct tProduct = new TProduct();
-            tProduct.setId(list.get(i));
+            TProduct tProduct = tProductMapper.selectById(list.get(i));
             tProduct.setStatus(false);
             tProductMapper.updateById(tProduct);
         }
@@ -148,14 +150,30 @@ public class TProductServiceImpl extends ServiceImpl<TProductMapper, TProduct> i
     private Boolean insertProduct_(List<TProduct> list) {
         if (list.size() == 0) return true;
         for (int i = 0; i < list.size(); i++) {
-            //添加店铺商品
             list.get(i).setId(UUIDUtils.getCharAndNumr());//此处生成UUID
+//            String hotelId = list.get(i).getHotelId();//拿到店铺ID
+//            //添加店铺商品
+//            THotel tHotel = new THotel();
+//            tHotel.setId(hotelId);
+//            tHotel.setProductId(list.get(i).getId());
+//            tHotelMapper.insert(tHotel);
+            //添加商品
             tProductMapper.insert(list.get(i));
             if (list.get(i).getProduct_image().size()>0){
                 //添加图片
                 for (TProductImage tProductImage : list.get(i).getProduct_image()) {
+                    tProductImage.setProductId(list.get(i).getId());
                     tProductImageMapper.insert(tProductImage);
                 }
+            }
+            //添加详细描述如果有的话
+            if (!list.get(i).getTProductContents().getContents().isEmpty()) {
+                list.get(i)
+                        .getTProductContents()
+                        .setId(list
+                                .get(i)
+                                .getId());
+                tProductContentsMapper.insert(list.get(i).getTProductContents());
             }
         }
         return true;

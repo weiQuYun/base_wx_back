@@ -56,11 +56,11 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
     }
 
     @Override
-    public boolean insertOrder(List<TCart> tCartList) {
+    public TOrder insertOrder(List<TCart> tCartList) {
         //获取了所有的购物车信息即商品iD
         //判断下是不是垃圾数据
         if (tCartList.size()<1) {
-            return false;
+            return null;
         }
         //1.生成唯一的订单ID 此ID 赋予订单详情用于查询具体商品
         String orderUUID = UUIDUtils.getCharAndNumr();
@@ -89,6 +89,6 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
         }
         //保存订单页
         tOrderMapper.insert(tOrder);
-        return true;
+        return tOrderMapper.selectByOrderNumber(tOrder.getOrderNumber());
     }
 }

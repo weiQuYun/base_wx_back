@@ -24,7 +24,7 @@ public class TOrderController {
     @Autowired
     private ITOrderService itOrderService;
 
-    @GetMapping("/list")
+    @GetMapping("/list")//两种情况查询 1.用户端只能查询自己 获取用户ID 后台获取使用info表
     @ApiOperation("条件获取数据")
     public List<TOrder> getList(TOrder tOrder) {
         return itOrderService.getList( tOrder);
@@ -37,7 +37,7 @@ public class TOrderController {
     //这是订单生成入口
     @PostMapping("")
     @ApiOperation("新建数据")
-    public boolean save(@RequestBody List<TCart> tCartList) {
+    public TOrder save(@RequestBody List<TCart> tCartList) {
         return itOrderService.insertOrder(tCartList);
     }
 //    @PostMapping("/batch")

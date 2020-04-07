@@ -104,4 +104,11 @@ public class TProduct extends BaseEntity<TProduct> implements Serializable {
     @TableField(exist = false)
     private TProductContents tProductContents = null;
 
+    /**
+     * 店铺ID
+     * **/
+    @ApiModelProperty(value = "店铺ID")
+    @TableField(value = "hotel_id",fill = FieldFill.INSERT_UPDATE)
+    private String hotelId;
+
 }

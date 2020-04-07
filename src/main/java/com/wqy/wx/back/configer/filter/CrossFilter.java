@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
-@Configuration
-@WebFilter(urlPatterns = {"/api/*"},filterName = "securityRequestFilter")
+//@Configuration
+//@WebFilter(urlPatterns = {"/api/*"},filterName = "securityRequestFilter")
 public class CrossFilter implements Filter {
 
     @Override

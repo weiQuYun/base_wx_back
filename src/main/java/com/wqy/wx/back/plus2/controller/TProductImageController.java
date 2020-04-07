@@ -20,25 +20,39 @@ import java.util.List;
 public class TProductImageController {
     @Autowired
     private ITProductImageService itProductImageService;
-
+    /**
+     * 测试通过 商品所有图片查询图片查询
+     * 接受ID 为商品ID 不是实际ID
+     * **/
     @GetMapping("/list/{id}")
     @ApiOperation("获取全部")
     public List<TProductImage> getProductImageAll(@PathVariable String id) {
         return itProductImageService.searchAll(id);
     }
 
+    /**
+     * 测试通过 删除单张图片
+     * 接受ID 为实际id
+     * **/
     @DeleteMapping("/{id}")
     @ApiOperation("删除")
     public Boolean deleteProductImage(@PathVariable String id) {
         return itProductImageService.deleteProductImage(id);
     }
 
+    /**
+     * 测试通过 添加图片
+     * 其接受的类ID无意义
+     **/
     @PostMapping("")
     @ApiOperation("添加")
     public Boolean addProductImage(@RequestBody TProductImage tProductImage) {
         return itProductImageService.insertProductImage(tProductImage);
     }
 
+    /**
+     * 测试通过
+     * **/
     @PutMapping("")
     @ApiOperation("修改")
     public Boolean updateProductImage(@RequestBody TProductImage tProductImage) {
@@ -53,6 +67,9 @@ public class TProductImageController {
 //        itProductImageService.searchAll(page, size);
 //    }
 
+    /**
+     * 测试通过
+     * **/
     @PutMapping("/batch")
     @ApiOperation("批量修改")
     public Boolean updateProductImageBatch(@RequestBody List<TProductImage> list) {
@@ -60,13 +77,19 @@ public class TProductImageController {
         return true;
     }
 
+    /**
+     * 测试通过
+     * **/
     @PostMapping("/batch")
-    @ApiOperation("批量添加")
+    @ApiOperation("批量添加,禁止传id")
     public Boolean addProductImageBatch(@RequestBody List<TProductImage> list) {
         itProductImageService.insertProductImage(list);
         return true;
     }
 
+    /**
+     * 测试通过
+     * **/
     @DeleteMapping("/delete/{id}")
     @ApiOperation("批量删除")
     public Boolean deleteProductImageBatch(@PathVariable List<String> id) {

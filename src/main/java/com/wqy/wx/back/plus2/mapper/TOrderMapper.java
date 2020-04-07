@@ -2,6 +2,7 @@ package com.wqy.wx.back.plus2.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wqy.wx.back.plus2.entity.TOrder;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.wqy.wx.back.plus2.entity.TOrder;
  */
 public interface TOrderMapper extends BaseMapper<TOrder> {
 
+    @Select("select * from t_order where order_number = #{orderNumber}")
+    TOrder selectByOrderNumber(String orderNumber);
 }

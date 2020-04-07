@@ -14,6 +14,5 @@ import org.apache.ibatis.annotations.Delete;
  */
 public interface TProductCatesMapper extends BaseMapper<TProductCates> {
 
-    @Delete("delete from t_product_cates where product_id = #{id}")
-    void deleteProduct(String id);
+
 }

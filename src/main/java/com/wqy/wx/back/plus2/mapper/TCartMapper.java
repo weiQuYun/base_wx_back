@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface TCartMapper extends BaseMapper<TCart> {
 
-    @Delete("delete from t_cart where product_id = #{id}")
+    @Delete("delete from t_cart where procute_id = #{id}")
     void deleteProduct(String id);
 
     @Select("select * from t_cart where menber_id = #{id}")

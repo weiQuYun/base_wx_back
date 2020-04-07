@@ -25,6 +25,7 @@ public class TCartController {
     @Autowired
     private ITCartService itCartService;
 
+    /**测试成功**/
     @GetMapping("/list")
     @ApiOperation("条件获取数据")
     public List<TCart> getList(TMenber tMenber) {

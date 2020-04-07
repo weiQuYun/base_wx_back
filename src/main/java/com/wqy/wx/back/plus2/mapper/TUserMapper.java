@@ -17,6 +17,6 @@ import java.util.List;
  */
 public interface TUserMapper extends BaseMapper<TUser> {
 
-    @Select("select * from t_user where username = #{username}")
+    @Select("select * from t_user where user_name = #{username}")
     List<TUser> selectByUserName(String username);
 }

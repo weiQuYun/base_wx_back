@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ITUserService extends IService<TUser> {
 
-    TUser searchAll(TUser tUser);
+    List<TUser> searchAll();
 
     Boolean deleteTUser(String id);
 
