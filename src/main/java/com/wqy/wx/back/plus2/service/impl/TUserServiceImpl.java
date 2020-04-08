@@ -1,8 +1,10 @@
 package com.wqy.wx.back.plus2.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.wqy.wx.back.common.util.ParamUtils;
 import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.plus2.entity.TUser;
 import com.wqy.wx.back.plus2.mapper.TUserMapper;
@@ -72,13 +74,15 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser> implements
      *分页查询 此处默认如果分页低于 1-5 默认使用1-20
      * **/
     @Override
-    public Page<TUser> searchAll(int page, int size) {
+    public Page<TUser> searchAll(int page, int size,TUser tUser) {
         if (page > 0 && size > 5) {
-            Page<TUser> tUserPage = tUserMapper.selectPage(new Page<>(page, size), null);
-            return tUserPage;
+            QueryWrapper<TUser> queryMrapper = new QueryWrapper<TUser>();
+            QueryWrapper<TUser> reflect = ParamUtils.reflect(tUser, queryMrapper);
+            return tUserMapper.selectPage(new Page<>(page, size), reflect);
         } else {
-            Page<TUser> tUserPage = tUserMapper.selectPage(new Page<>(1, 20), null);
-            return tUserPage;
+            QueryWrapper<TUser> queryMrapper = new QueryWrapper<TUser>();
+            QueryWrapper<TUser> reflect = ParamUtils.reflect(tUser, queryMrapper);
+            return tUserMapper.selectPage(new Page<>(1, 20), reflect);
         }
     }
 

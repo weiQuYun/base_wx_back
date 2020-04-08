@@ -32,7 +32,7 @@ public interface ITOrderService extends IService<TOrder> {
      */
     Page<TOrder> getPage(TOrder tOrder, PageDTO pageDTO);
 
-    TOrder insertOrder(List<TCart> tCartList);
+    TOrder insertOrder(List<TCart> tCartList) throws Exception;
 
-    boolean updateByOrderId(TOrder tOrders);
+    boolean updateByOrderId(TOrder tOrders) throws Exception;
 }

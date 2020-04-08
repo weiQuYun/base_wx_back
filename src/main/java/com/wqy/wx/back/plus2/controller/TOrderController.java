@@ -37,7 +37,7 @@ public class TOrderController {
     //这是订单生成入口
     @PostMapping("")
     @ApiOperation("新建数据")
-    public TOrder save(@RequestBody List<TCart> tCartList) {
+    public TOrder save(@RequestBody List<TCart> tCartList) throws Exception {
         return itOrderService.insertOrder(tCartList);
     }
 //    @PostMapping("/batch")
@@ -48,7 +48,7 @@ public class TOrderController {
     //正式生成订单使用修改
     @PutMapping("")
     @ApiOperation("修改")
-    public boolean update(@RequestBody TOrder tOrders) {
+    public boolean update(@RequestBody TOrder tOrders) throws Exception {
         return itOrderService.updateByOrderId(tOrders);
     }
 

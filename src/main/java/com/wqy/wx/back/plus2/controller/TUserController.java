@@ -80,8 +80,8 @@ public class TUserController {
      * **/
     @GetMapping("/page/{page}/{size}")
     @ApiOperation("分页查询")
-    public Page<TUser> searchTUserPage(@PathVariable int page, @PathVariable int size)  {
-        return itUserService.searchAll(page, size);
+    public Page<TUser> searchTUserPage(@PathVariable int page, @PathVariable int size,TUser tUser)  {
+        return itUserService.searchAll(page, size,tUser);
     }
     //以下不存在
 //    @PutMapping("/batch")

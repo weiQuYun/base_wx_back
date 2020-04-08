@@ -24,7 +24,7 @@ public interface ITUserService extends IService<TUser> {
 
     Boolean updateTUser(TUser tUser);
 
-    Page<TUser> searchAll(int page, int size);
+    Page<TUser> searchAll(int page, int size,TUser tUser);
 
     Boolean insertTUser(List<TUser> list);
 

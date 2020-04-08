@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wqy.wx.back.common.util.ParamUtils;
 import com.wqy.wx.back.common.util.UUIDUtils;
 import com.wqy.wx.back.common.util.page.PageDTO;
+import com.wqy.wx.back.configer.exception.BizException;
 import com.wqy.wx.back.plus2.entity.TCart;
 import com.wqy.wx.back.plus2.entity.TOrder;
 import com.wqy.wx.back.plus2.entity.TOrderInfo;
@@ -59,7 +60,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
 
     @Override
     @Transactional
-    public TOrder insertOrder(List<TCart> tCartList) {
+    public TOrder insertOrder(List<TCart> tCartList) throws Exception {
         //获取了所有的购物车信息即商品iD
         //判断下是不是垃圾数据
         if (tCartList.size()<1) {
@@ -82,13 +83,13 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
             TProduct tProduct = tProductMapper.selectById(procuteId);
             //此处增加库存判定
             if (!updateNumber(tOrder)){
-                new Exception("库存异常");
+                throw new BizException("库存异常");
             }
             //以上
             TOrderInfo tOrderInfo = new TOrderInfo();//填充详情页
             tOrderInfo.setOrderId(orderUUID);
             tOrderInfo.setProductId(procuteId);
-            tOrderInfo.setProduct_number(tCart.getProcuteNumber());
+            tOrderInfo.setProductNumber(tCart.getProcuteNumber());
             tOrderInfo.setReceivableAmount(tProduct.getPriceOld().multiply(new BigDecimal(tCart.getProcuteNumber())));//...........这尼玛有毒填入实际价格即原价
             tOrderInfo.setReceivedAmount(tProduct.getPriceNew().multiply(new BigDecimal(tCart.getProcuteNumber())));//填入实收金额
             tOrderInfo.setDiscountAmount(tProduct.getPriceOld().multiply(new BigDecimal(tCart.getProcuteNumber()))
@@ -105,7 +106,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
      * 生成订单时已经判定库存问题
      * **/
     @Override
-    public boolean updateByOrderId(TOrder tOrders) {
+    public boolean updateByOrderId(TOrder tOrders) throws Exception {
         //主要实现库存修改
         if (tOrders.getPayStatus()>0) {
             //已经付款 去库存
@@ -113,10 +114,10 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
             List<TOrderInfo> tOrderInfoList = tOrderInfoMapper.searchByOrderNumber(orderNumber);//获取所有下单商品
             for (TOrderInfo tOrderInfo : tOrderInfoList) {
                 if (!updateNumber(tOrders)){
-                    new Exception("库存异常");
+                   throw  new BizException("库存异常");
                 }
                 String productId = tOrderInfo.getProductId();//获取商品ID
-                Integer product_number = tOrderInfo.getProduct_number();//获取商品数量
+                Integer product_number = tOrderInfo.getProductNumber();//获取商品数量
                 TProduct tProduct = tProductMapper.selectById(productId);
                 Integer proNumber = tProduct.getProNumber();
                 tProduct.setProNumber(proNumber-product_number);//去库存
@@ -130,7 +131,7 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
             //未付款正常订单项填充直接改订单
             tOrderMapper.updateById(tOrders);
         }
-        return false;
+        return true;
     }
 
     /**
@@ -139,7 +140,9 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
     public Boolean updateNumber(TOrder tOrder){
         List<TOrderInfo> tOrderInfoList = tOrderInfoMapper.searchByOrderNumber(tOrder.getOrderNumber());//获取所有下单
         for (TOrderInfo tOrderInfo : tOrderInfoList) {
-            if(tProductMapper.selectById(tOrderInfo.getProductId()).getProNumber()-tOrderInfo.getProduct_number()<0){
+            Integer proNumber = tProductMapper.selectById(tOrderInfo.getProductId()).getProNumber();
+            Integer productNumber = tOrderInfo.getProductNumber();
+            if((proNumber-productNumber)<0){
                 return false;
             }
         }
