@@ -1,24 +1,25 @@
 package com.wqy.wx.back.configer.filter;
 
 import com.wqy.wx.back.common.Constant;
+import com.wqy.wx.back.common.util.IpUtils;
 import com.wqy.wx.back.configer.Req;
 import com.wqy.wx.back.configer.exception.BizException;
+import com.wqy.wx.back.configer.redis.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
 //@Configuration
 //@WebFilter(urlPatterns = {"/api/*"},filterName = "securityRequestFilter")
 public class CrossFilter implements Filter {
-
+  @Autowired
+  private RedisUtil redisUtil;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.debug("过滤器初始化。。。");
@@ -32,18 +33,18 @@ public class CrossFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
-        log.debug("跨域请求进来了。。。");
+        log.info("跨域请求进来了。。。");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String path = httpServletRequest.getServletPath();
         System.out.println("請求路徑：" + path);
         String token = httpServletRequest.getHeader("token");
         String userId = httpServletRequest.getHeader("userId");
-        HttpSession session = httpServletRequest.getSession();
-        if(path.contains(Constant.MAPPING)) {
+        if(path.contains(Constant.MAPPING)&&!httpServletRequest.getMethod().equals("OPTIONS")) {
             if(StringUtils.isNotEmpty(token) && StringUtils.isNotEmpty(userId)){
-                Req vxLoginDto1 = (Req)session.getAttribute(userId);
+                Req vxLoginDto1 = (Req)redisUtil.get(userId);
                 if(vxLoginDto1!=null){
-                    if(!vxLoginDto1.getIp().equals((request.getRemoteAddr()))){
+                    if(!vxLoginDto1.getIp().equals((IpUtils.getIp(httpServletRequest)))){
+                        log.info("登陆ip:{} 已有ip:{}",IpUtils.getIp(httpServletRequest),vxLoginDto1.getIp());
                         throw new BizException("单点登陆，此用户已在其他设备上登陆使用");
                     }
                 }else{
@@ -56,7 +57,6 @@ public class CrossFilter implements Filter {
 //      设置响应头
         HttpServletResponse httpResponse = getHttpServletResponse((HttpServletResponse) response);
         chain.doFilter(request, httpResponse);
-
     }
 
     private HttpServletResponse getHttpServletResponse(HttpServletResponse response) {

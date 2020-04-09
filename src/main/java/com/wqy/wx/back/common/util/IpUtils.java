@@ -17,6 +17,9 @@ import java.util.regex.Pattern;
  */
 public class IpUtils {
 
+    public static String getIp(HttpServletRequest request){
+        return request.getRemoteAddr().equals("0:0:0:0:0:0:0:1")?"127.0.0.1":request.getRemoteAddr();
+    }
     /**
      * 获取客户机ip地址
      *

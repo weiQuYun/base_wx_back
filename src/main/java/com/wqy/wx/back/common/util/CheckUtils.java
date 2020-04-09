@@ -3,7 +3,7 @@ package com.wqy.wx.back.common.util;
 import com.wqy.wx.back.common.Constant;
 import com.wqy.wx.back.configer.exception.BizException;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Collection;
 import java.util.regex.Matcher;
@@ -76,6 +76,26 @@ public class CheckUtils {
     }
     public static void isListBlank(Collection collection ,String msg) {
         if(CollectionUtils.isEmpty(collection)){
+            throw new BizException(msg+"数据不能为空");
+        }
+    }
+    public static void isStrBlank(String str ,String msg) {
+        if(StringUtils.isEmpty(str)){
+            throw new BizException(msg+"数据不能为空");
+        }
+    }
+    public static void isStrBlank(String str ,String msg,String reg) {
+        if(StringUtils.isNotEmpty(str)){
+            Pattern pattern = Pattern.compile(reg);
+            Matcher isNum = pattern.matcher(str);
+            if (!isNum.matches()) {
+                throw new BizException(msg+"格式异常");
+            }
+        }
+        throw new BizException(msg+"数据不能为空");
+    }
+    public static void isObjectBlank(Object o ,String msg) {
+        if(null== o){
             throw new BizException(msg+"数据不能为空");
         }
     }

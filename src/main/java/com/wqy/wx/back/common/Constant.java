@@ -80,4 +80,12 @@ public class Constant {
     public static final String FLOAT = "float";
 
     public static final String defaultDate = DateUtil.dateToString(new Date());
+    /**
+     * 手机号
+     */
+    public static final String REGEX_MOBILE = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+    /**
+     * 登陆过期时间 秒
+     */
+    public static final long LOGIN_TIME_OUT = 60*60*2;
 }
